@@ -4,7 +4,7 @@ theme = "paper"
 paginate = 5
 [params]
   # color style
-  color = 'linen'                           # linen, wheat, gray, light
+  color = 'light'                           # linen, wheat, gray, light
 
   # header social icons
   #twitter = 'YOUR_TWITTER_ID'               # twitter.com/YOUR_TWITTER_ID
@@ -48,7 +48,7 @@ paginate = 5
     missingBackButtonLabel = "Back to home page"
 
     [languages.en.params.logo]
-      logoText = "Terminal"
+      logoText = "JHeiduk.com"
       logoHomeLink = "/"
 
     [languages.en.menu]
@@ -56,7 +56,3 @@ paginate = 5
         identifier = "about"
         name = "About"
         url = "/about"
-      [[languages.en.menu.main]]
-        identifier = "showcase"
-        name = "Showcase"
-        url = "/showcase"
