@@ -36,8 +36,8 @@ paginate = 5
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Terminal"
-    subtitle = "A simple, retro theme for Hugo"
+    title = "Julien heiduk"
+    subtitle = "A simple blog about data..."
     owner = ""
     keywords = ""
     copyright = ""
