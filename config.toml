@@ -36,7 +36,7 @@ paginate = 5
 [languages]
   [languages.en]
     languageName = "English"
-    title = "Julien heiduk"
+    title = "Julien Heiduk"
     subtitle = "A simple blog about data..."
     owner = ""
     keywords = ""
