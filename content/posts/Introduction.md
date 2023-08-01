@@ -1,13 +1,8 @@
 ---
 title: "Introduction"
-date: 2023-08-01T08:52:20-08:00
+date: 2023-08-01
 draft: false
 ---
-
-# Introduction
-
-Responsable: Julien
-Créée le: 19 juillet 2023 15:48
 
 ## **Introduction**
 
@@ -24,3 +19,6 @@ En 2019, j'ai décidé de canaliser mon expertise et mon enthousiasme pour la Da
 Parallèlement à mon travail de Data Scientist, j'ai également pris le rôle de formateur et de **mentor** depuis 2017. Cette expérience m'a donné l'occasion d'accompagner de nombreux aspirants Data Scientists, partageant avec eux les connaissances et les compétences que j'ai acquises tout au long de ma carrière. J'ai été témoin du pouvoir transformationnel de l'éducation, et j'ai été inspiré par l'énergie et la curiosité de ceux que j'ai eu le privilège de guider.
 
 En partageant mon parcours et mes conseils à travers ce blog, j'espère vous inspirer et vous aider à tracer votre propre chemin dans le monde de la Data Science. Quel que soit le stade de votre carrière, je crois fermement que vous pouvez toujours apprendre et grandir. Alors, allons-y ensemble. Bienvenue dans ce voyage passionnant vers la maîtrise de la Data Science!
+
+Responsable: Julien
+Créée le: 19 juillet 2023 15:48
