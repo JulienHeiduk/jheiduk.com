@@ -4,8 +4,6 @@ date: 2023-08-01
 draft: false
 ---
 
-## **Introduction**
-
 Bienvenue dans le monde passionnant de la Data Science, où les données sont notre langage et l'intelligence artificielle notre principal outil pour déchiffrer ce langage. Je suis ravi que vous soyez ici, prêt à plonger dans le vaste océan des informations et des connaissances. Avant de commencer, laissez moi vous raconter un peu mon histoire et pourquoi j’ai créé ce blog.
 
 Je suis Senior Data Scientist avec plus d'une dizaine d’année d'expérience dans le domaine. Mon parcours en Data Science a débuté en 2012, lorsque j'ai obtenu un Master en Statistiques. Mon parcours a été mon premier pas dans l'univers fascinant des mathématiques et de la donnée, me donnant une base solide en statistiques, l'un des piliers de la Data Science.
