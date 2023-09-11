@@ -1,8 +1,10 @@
+---
+title: "Recommandation de produits dans le commerce de détail en ligne"
+date: 2023-08-01
+draft: false
+---
+
 # Recommandation de produits dans le commerce de détail en ligne
-
-Responsable: Julien
-Créée le: 31 août 2023 14:40
-
 # Contexte
 
 **Papier de recherche**: [https://users.soe.ucsc.edu/~pkouki/kouki-recsys19.pdf](https://users.soe.ucsc.edu/~pkouki/kouki-recsys19.pdf)
