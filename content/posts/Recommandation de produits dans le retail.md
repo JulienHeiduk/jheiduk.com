@@ -137,7 +137,7 @@ Il est essentiel de souligner que ce calcul de probabilité est effectué unique
 
 Pour ce faire, nous collectons toutes les transactions en ligne où au moins deux produits ont été acquis au cours d'une période définie, comme une année, par exemple.
 
-Sur la base de ces transactions, nous compilons une liste de tous les produits achetés, que nous désignons $P_p=\{p_{p,1},...,p_{p,q}\}$. On construit ensuite une liste de relations entre ces produits, notée $R_p$ avec $R_p = \{ rp(pp_i, pp_j), \ldots, rp(pp_k, pp_l) \}$. Une relation $r_p(p_{p,i}, p_{p,j})$ signifie que les produits $p_{p,i}$ et $p_{p,j}$ ont été achetés ensemble lors d'une même transaction. Si deux produits sont achetés ensemble plusieurs fois, cette paire apparaîtra plusieurs fois dans $R_p$.
+Sur la base de ces transactions, nous compilons une liste de tous les produits achetés, que nous désignons $P_p=\{p_{p,1},...,p_{p,q}\}$. On construit ensuite une liste de relations entre ces produits, notée $$R_p$$ avec $R_p = \{ rp(pp_i, pp_j), \ldots, rp(pp_k, pp_l) \}$. Une relation $r_p(p_{p,i}, p_{p,j})$ signifie que les produits $p_{p,i}$ et $p_{p,j}$ ont été achetés ensemble lors d'une même transaction. Si deux produits sont achetés ensemble plusieurs fois, cette paire apparaîtra plusieurs fois dans $R_p$.
 
 De la même manière que dans la section précédente, pour chaque produit dans $P_p$, on identifie sa catégorie ou hiérarchie. Ensuite, plutôt que de nous concentrer sur les relations entre produits individuels, nous les convertissons en relations entre leurs hiérarchies respectives, générant ainsi un nouvel ensemble de relations, désigné par $Q_p$.
 
