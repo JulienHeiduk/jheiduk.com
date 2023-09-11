@@ -181,7 +181,7 @@ Les réseaux siamois sont entraînés pour distinguer deux catégories de paires
 
 Pour entraîner le réseau, nous nous appuyons sur les connaissances d'experts du domaine. Lorsque ces experts estiment que deux produits sont de lmême série, nous prenons cette affirmation comme vraie. Pour chaque paire de produits jugés similaires ou complémentaire par les experts, nous générons également plusieurs paires de produits jugés non similaires en sélectionnant aléatoirement d'autres produits dans la base.
 
-![Article_2_siamese.png](Images/Article_2_siamese.png)
+![Article_2_siamese.png](jheiduk.com/content/posts/Images/Article_2_siamese.png)
 
 # 4. Le processus de recommendations
 
