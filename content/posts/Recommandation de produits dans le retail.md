@@ -201,7 +201,7 @@ Ce processus permet de filtrer efficacement les produits candidats en fonction d
 
 3 méthodes ont été étudiées par Home Dépôt. La première, appelée DomExp, utilise les données des fournisseurs. La seconde, nommée DomExpEmb, utilise CG-1 et le ranker basé sur la donnée textuelle. Enfin, la troisième méthode emploie CG-2 et le ranker basé sur la donnée textuelle.
 
-![Article_2_results](static/Article_2_results.png)
+![Article_2_results](/Article_2_results.png)
 
 La meilleure option est l’approche couplant le générateur de candidats basé sur les achats et le ranker fondé sur les embeddings textuels. Cela s'explique par le fait que les fournisseurs fournissent des collections de la même marque. Or, les clients n'achètent pas forcément l'ensemble des produits d'une seule et même marque. Il y a donc davantage de relations pertinentes lorsque l'on se base sur les données transactionnelles.
 
