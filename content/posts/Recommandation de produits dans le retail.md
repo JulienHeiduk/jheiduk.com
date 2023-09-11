@@ -84,7 +84,7 @@ $$
 (2) ~ ∀h_i,h_j ∈ H_c : C_{i,1} = C_{j,1}
 $$
 
-**(3)** = L'ensemble des hiérarchies auxquelles les produits de la collection sont rattachés, $H_c$, ne peut pas contenir des doublons. L’idée est de ne pas proposer des produits interchangeables.
+**(3)** = L'ensemble des hiérarchies auxquelles les produits de la collection sont rattachés, $$H_c$$, ne peut pas contenir des doublons. L’idée est de ne pas proposer des produits interchangeables.
 
 $$
 ∀h_i,hj ∈ H_c : h_i \neq h_j
