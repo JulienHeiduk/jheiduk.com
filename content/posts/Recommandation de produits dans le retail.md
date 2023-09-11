@@ -1,10 +1,9 @@
 ---
 title: "Recommandation de produits dans le commerce de détail en ligne"
-date: 2023-08-01
+date: 2023-09-11
 draft: false
 ---
 
-# Recommandation de produits dans le commerce de détail en ligne
 # Contexte
 
 **Papier de recherche**: [https://users.soe.ucsc.edu/~pkouki/kouki-recsys19.pdf](https://users.soe.ucsc.edu/~pkouki/kouki-recsys19.pdf)
@@ -182,7 +181,7 @@ Les réseaux siamois sont entraînés pour distinguer deux catégories de paires
 
 Pour entraîner le réseau, nous nous appuyons sur les connaissances d'experts du domaine. Lorsque ces experts estiment que deux produits sont de lmême série, nous prenons cette affirmation comme vraie. Pour chaque paire de produits jugés similaires ou complémentaire par les experts, nous générons également plusieurs paires de produits jugés non similaires en sélectionnant aléatoirement d'autres produits dans la base.
 
-![Article_2_siamese.png](Images/Sans-titre-2023-09-06-1440.png)
+![Article_2_siamese.png](Images/Article_2_siamese.png)
 
 # 4. Le processus de recommendations
 
@@ -202,7 +201,7 @@ Ce processus permet de filtrer efficacement les produits candidats en fonction d
 
 3 méthodes ont été étudiées par Home Dépôt. La première, appelée DomExp, utilise les données des fournisseurs. La seconde, nommée DomExpEmb, utilise CG-1 et le ranker basé sur la donnée textuelle. Enfin, la troisième méthode emploie CG-2 et le ranker basé sur la donnée textuelle.
 
-![Article_2_results](Images/Untitled.png)
+![Article_2_results](/Images/Article_2_results.png)
 
 La meilleure option est l’approche couplant le générateur de candidats basé sur les achats et le ranker fondé sur les embeddings textuels. Cela s'explique par le fait que les fournisseurs fournissent des collections de la même marque. Or, les clients n'achètent pas forcément l'ensemble des produits d'une seule et même marque. Il y a donc davantage de relations pertinentes lorsque l'on se base sur les données transactionnelles.
 
