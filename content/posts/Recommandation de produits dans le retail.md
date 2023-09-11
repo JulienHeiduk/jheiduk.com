@@ -76,14 +76,12 @@ En général, des règles métier sont utilisées pour réaliser ce genre de con
 
 $$
 (1) ~ ∀p_i ∈ Pc : color_{pi} = color_{pa}, ~ title_{pi} ≈ title_{pa}, ~ description_{pi} ≈ description_{pa}
-
 $$
 
 **(2)** = L'ensemble des produits de la collection doit partager la même catégorie racine entre eux et avoir également la même catégorie racine que le produit "Ancre".
 
 $$
 (2) ~ ∀h_i,h_j ∈ H_c : C_{i,1} = C_{j,1}
-
 $$
 
 **(3)** = L'ensemble des hiérarchies auxquelles les produits de la collection sont rattachés, $H_c$, ne peut pas contenir des doublons. L’idée est de ne pas proposer des produits interchangeables.
