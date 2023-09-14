@@ -58,8 +58,7 @@ $$
 - $h$ = Une hiérarchie représente un ensemble de catégories ordonnées liées par des relations de sous-classe.
 
 $$
-h = (C1,C2, ...,Ck−1,Ck) ~where~r(Ci
-,Ci+1) ∈ R, i = 1...k ~
+h = (C1,C2, ...,Ck−1,Ck) ~where~r(Ci,Ci+1) ∈ R, i = 1...k
 $$
 $$
 H ~est~l'ensemble~de~toutes~les~hierachies~possible.
@@ -71,10 +70,7 @@ $$
 Pour~ un ~ produit~p_a~ nous~voulons~un~ensemble~de~produits~Pc = \{p_{c,1}, ...,p_{c,k}\}  
 $$
 $$
-tel~que:~\{p_a,p_{c,1},...,p_{c,k}\}~avec~
-les~hierarchies~suivantes~Hc =\{h_a,h_{c,1}
-, ...,h_{c,k}
-\}
+tel~que:~\{p_a,p_{c,1},...,p_{c,k}\}~avec~les~hierarchies~suivantes~Hc =\{h_a,h_{c,1}, ...,h_{c,k}\}
 $$
 $$
 soient~pertinentes~pour~l'utilisateur
