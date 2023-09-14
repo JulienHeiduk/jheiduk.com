@@ -67,7 +67,7 @@ $$
 - La formulation du problème est la suivante:
 
 $$
-Pour~ un ~ produit~p_a~ nous~voulons~un~ensemble~de~produits~Pc = \{p_{c,1}, ...,p_{c,k}\}  
+Pour~ un ~ produit~p_a~ nous~voulons~un~ensemble~de~produits~Pc = \{p_{c,1}, ...,p_{c,k}\}
 $$
 $$
 tel~que:~\{p_a,p_{c,1},...,p_{c,k}\}~avec~les~hierarchies~suivantes~Hc =\{h_a,h_{c,1}, ...,h_{c,k}\}
