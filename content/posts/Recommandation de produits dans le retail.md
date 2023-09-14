@@ -31,7 +31,7 @@ Avant de rentrer dans le détail des méthodes utilisées, nous allons voir quel
 
 # 1. Quelques définitions
 
-- $P$ = Ensemble de produits.
+-  {{< katex >}}$P$ {{< /katex >}} = Ensemble de produits.
 
 $$
 P = \{p_1,...,p_k\}
