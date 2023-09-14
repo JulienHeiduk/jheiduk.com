@@ -65,7 +65,16 @@
   <!---->
   {{ end }}
   <!---->
-
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+      });
+  </script>
   <!-- Favicon -->
   <link rel="icon" href="{{ `favicon.ico` | absURL }}" />
   <link rel="apple-touch-icon" href="{{ `apple-touch-icon.png` | absURL }}" />
