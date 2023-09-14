@@ -169,7 +169,7 @@ Nous concluons par le calcul de la probabilité. Pour les hiérarchies relevant 
     Ces relations sont notre $R_m$.
     
 1. **Transformation en relations de hiérarchie**: Au lieu de se concentrer sur les relations entre produits individuels, on examine les relations entre leurs catégories. Ainsi, puisque la spatule est en relation avec le blender, on peut établir une relation entre « Ustensiles de cuisine » et « Petit Electroménager ».
-2. **Calcul des probabilités**: Supposons que, sur 100 achats comportant la catégorie racine "cuisine", 80 mentionnent à la fois "Ustensiles de cuisine" et "Petit Electroménager", mais que les "Ustensiles de cuisine" apparaissent dans 90 de ces achats**:** $Prob_m(Ustensiles ~de~cusine, Petit ~Electroménager) = \frac{80}{90}$.
+2. **Calcul des probabilités**: Supposons que, sur 100 achats comportant la catégorie racine "cuisine", 80 mentionnent à la fois "Ustensiles de cuisine" et "Petit Electroménager", mais que les "Ustensiles de cuisine" apparaissent dans 90 de ces achats: $Prob_m(Ustensiles ~de~cusine, Petit ~Electroménager) = \frac{80}{90}$.
 3. **Condition importante**: Pour une catégorie générale comme "Produits pour la maison", on peut également décomposer la probabilité de co-achat entre des catégories plus spécifiques, telles que "Ustensiles de cuisine" et "Accessoires de salle de bain", à condition que ces produits appartiennent à la même catégorie générale.
 
 Maintenant que les probabilités entre les hiérarchies sont définies, nous pouvons passer à l'étape d'utilisation des données textuelles liées aux produits.
