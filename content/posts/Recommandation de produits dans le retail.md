@@ -12,7 +12,7 @@ draft: false
 
 **Modèles**: Réseaux de neurones siamois & BiLSTM
 
-**Sujet**: Moteur de recommandations
+**Sujet**: Moteur de recommandations à 2 étapes (Générateur de candidats + Ranker) 
 
 **Mots-clés**: #Embeddings #Item-to-item #Multimodal #Online-recommender-system
 
