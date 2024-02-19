@@ -1,7 +1,7 @@
 ---
 title: "Génrérateur de candidats complémentaires"
 date: 2024-01-15
-draft: false
+draft: true
 ---
 
 ## Contexte
@@ -28,4 +28,4 @@ Avant de rentrer dans le vif du sujet nous allons tout d'abord définir ce qu'es
 
 Le générateur de candidat se base sur l'architecture Word2Vec qui possède une double représentation (dual embeddings) pour chaque élément traité. Au lieu de mettre dans la donnée un ensemble de mot, de phrases ou de textes nous y mettrons les pairs de produits achetés ensemble.
 
-A partir des sessions d'achats des clients nous constiturons la donnée en prenant les paires d'achats en prenant toutes les combinaisons par paires. Autrement dit, pour une session donnée \(s = \{p_1, p_2, p_3, \ldots, p_n\}\), nous prenons le produit cartésien de \(s\) avec elle-même \(s \times s = \{(p_i, p_j) | p_i \in s, p_j \in s, p_i \neq p_j\}\). En procédant ainsi pour chaque session, nous obtenons une nouvelle donnée de co-achat par paire \(D\).
+A partir des sessions d'achats des clients nous constiturons la donnée en prenant les paires d'achats en prenant toutes les combinaisons par paires. Autrement dit, pour une session donnée $\(s = \{p_1, p_2, p_3,\ldots, p_n\}\)$, nous prenons le produit cartésien de $\(s\)$ avec elle-même $\(s \times s = \{(p_i, p_j) | p_i \in s, p_j \in s, p_i \neq p_j\}\)$. En procédant ainsi pour chaque session, nous obtenons une nouvelle donnée de co-achat par paire $\(D\)$.
