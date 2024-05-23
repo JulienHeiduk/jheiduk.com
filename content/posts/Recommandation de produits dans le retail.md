@@ -1,5 +1,5 @@
 ---
-title: "Recommandation de produits dans le commerce de détail en ligne"
+title: "Recommandation de produits dans le retail"
 date: 2023-09-11
 draft: false
 ---
