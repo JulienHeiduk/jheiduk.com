@@ -4,7 +4,7 @@ date: 2023-09-11
 draft: false
 ---
 
-# Contexte
+## Contexte
 
 **Papier de recherche**: [https://users.soe.ucsc.edu/~pkouki/kouki-recsys19.pdf](https://users.soe.ucsc.edu/~pkouki/kouki-recsys19.pdf)
 
@@ -12,11 +12,11 @@ draft: false
 
 **Modèles**: Réseaux de neurones siamois & BiLSTM
 
-**Sujet**: Moteur de recommandations à 2 étapes (Générateur de candidats + Ranker) 
+**Sujet**: Moteur de recommandations à 2 étapes (Générateur de candidats + Ranker)
 
 **Mots-clés**: #Embeddings #Item-to-item #Multimodal #Online-recommender-system
 
-# Introduction
+## Introduction
 
 À travers ce premier article, nous allons étudier la méthode proposée par Home Dépôt afin de recommander des produits sur chaque page de produit. Le moteur de recommandations proposé dans ce papier de recherche est qualifié d'**Item-to-item**. Ce qui signifie que les données utilisées pour construire le système proviennent essentiellement des produits. Nous sommes dans le cas d’un **moteur de recommandation non personnalisé**.
 
