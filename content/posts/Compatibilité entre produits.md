@@ -1,8 +1,19 @@
 ---
-title: "Génrérateur de candidats complémentaires"
+title: "Compatibilité entre produits"
 date: 2024-05-23
 draft: false
 ---
+# Contexte
+
+**Papier de recherche**: [https://arxiv.org/pdf/2206.13749](https://arxiv.org/pdf/2206.13749)
+
+**Année**: 2022
+
+**Modèles**: LLM, Arbre de décision
+
+**Sujet**: Compatibilité entre produits basé sur des données structurées et non structurées
+
+**Mots-clés**: #LLM #DecsionTree #RecommenderSystem
 
 # Analyse détaillée de l'article "Adaptive Multi-view Rule Discovery for Weakly-Supervised Compatible Products Prediction"
 
