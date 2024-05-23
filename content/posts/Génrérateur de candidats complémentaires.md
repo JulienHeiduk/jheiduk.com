@@ -64,8 +64,9 @@ Pour évaluer l'efficacité de notre méthode, nous avons réalisé des expérie
 1. Ensembles de données
 Overstock.com : Ensemble de données propriétaire comprenant deux ans de transactions, avec plus de 18 millions d'utilisateurs et 24 millions de sessions.
 Instacart.com : Ensemble de données public comprenant plus de 3 millions de commandes, collectées à partir de diverses catégories de produits.
+
 2. Détails de la mise en œuvre
-Nous avons utilisé fastText++ pour entraîner le modèle SGNS et Faiss pour les recherches de plus proches voisins en temps réel. Les hyperparamètres ont été optimisés à l'aide de Ray Tune.
+fastText++ a été utilisé pour entraîner le modèle SGNS et Faiss pour les recherches de plus proches voisins en temps réel. Les hyperparamètres ont été optimisés à l'aide de Ray Tune.
 
 3. Pré-traitement des données
 Nous avons éliminé les utilisateurs et sessions avec un nombre exceptionnellement élevé d'achats pour éviter les biais. Les paires de produits ont été filtrées en utilisant la PMI (Pointwise Mutual Information) pour identifier les relations faibles.
@@ -75,5 +76,3 @@ Les résultats ont montré que l'approche IN-OUT surpassait les autres méthodes
 
 ## Conclusion
 En utilisant des embeddings duaux pour les recommandations de produits complémentaires, notre méthode améliore significativement la pertinence des recommandations. La simplicité de mise en œuvre et l'efficacité de notre modèle en font une solution viable pour les grandes plateformes de commerce en ligne. Nos expérimentations démontrent une augmentation de la couverture des produits et une amélioration de la pertinence des recommandations, ce qui constitue une base solide pour des recherches futures dans ce domaine.
-
-
