@@ -163,6 +163,13 @@ Now that everything is set up, you can run your pipeline. Open your terminal, na
 python pipelines/training_pipeline.py
 ```
 
+After the run you can access to your zenml server and get the information about your pipeline:
+
+![zenml_tutorial_1.png](/zenml_tutorial_1.png)
+
+
+This screenshot shows a ZenML pipeline run overview, highlighting the successful execution of a pipeline named "Tutorial-2024_08_16-09_27_42_066186." The visual flow on the left displays the pipeline's components, including loading data, training a RandomForest model, and evaluating the model. The run status is marked as "completed," with start and end times provided, indicating a swift and successful run. The details panel on the right also includes information about the stack, including the artifact store and orchestrator used in this pipeline.
+
 ### Conclusion
 
 Congratulations! You have successfully set up and run a basic machine learning pipeline using ZenML. This tutorial demonstrated how to define a pipeline, load data, train a model, and evaluate its performance. You can extend this pipeline by adding more steps, integrating different models, or experimenting with other datasets. You can find the repository here: https://github.com/JulienHeiduk/zenml-ml. Happy coding!
