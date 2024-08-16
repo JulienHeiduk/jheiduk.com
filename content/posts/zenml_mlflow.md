@@ -3,8 +3,7 @@ title: "Adding MLflow to a ZenML Pipeline"
 date: 2024-08-16
 draft: false
 ---
-
-# Adding MLflow to a ZenML Pipeline
+## Introduction
 
 In this tutorial, we will integrate MLflow into a ZenML pipeline for tracking machine learning experiments. MLflow is an open-source platform to manage the ML lifecycle, including experimentation, reproducibility, and deployment.
 
