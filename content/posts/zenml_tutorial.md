@@ -165,4 +165,4 @@ python pipelines/training_pipeline.py
 
 ### Conclusion
 
-Congratulations! You have successfully set up and run a basic machine learning pipeline using ZenML. This tutorial demonstrated how to define a pipeline, load data, train a model, and evaluate its performance. You can extend this pipeline by adding more steps, integrating different models, or experimenting with other datasets. Happy coding!
+Congratulations! You have successfully set up and run a basic machine learning pipeline using ZenML. This tutorial demonstrated how to define a pipeline, load data, train a model, and evaluate its performance. You can extend this pipeline by adding more steps, integrating different models, or experimenting with other datasets. You can find the repository here: https://github.com/JulienHeiduk/zenml-ml. Happy coding!
