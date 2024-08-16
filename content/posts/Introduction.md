@@ -4,19 +4,19 @@ date: 2023-08-01
 draft: false
 ---
 
-Bienvenue dans le monde passionnant de la Data Science, où les données sont notre langage et l'intelligence artificielle notre principal outil pour déchiffrer ce langage. Je suis ravi que vous soyez ici, prêt à plonger dans le vaste océan des informations et des connaissances. Avant de commencer, laissez moi vous raconter un peu mon histoire et pourquoi j’ai créé ce blog.
+Welcome to the exciting world of Data Science, where data is our language and artificial intelligence is our primary tool to decipher that language. I am thrilled that you are here, ready to dive into the vast ocean of information and knowledge. Before we begin, let me share a bit of my story and why I created this blog.
 
-Je suis Senior Data Scientist avec plus d'une dizaine d’année d'expérience dans le domaine. Mon parcours en Data Science a débuté en 2012, lorsque j'ai obtenu un Master en Statistiques. Mon parcours a été mon premier pas dans l'univers fascinant des mathématiques et de la donnée, me donnant une base solide en statistiques, l'un des piliers de la Data Science.
+I am a Senior Data Scientist with over a decade of experience in the field. My journey in Data Science began in 2012 when I earned a Master's degree in Statistics. This was my first step into the fascinating world of mathematics and data, providing me with a solid foundation in statistics, one of the pillars of Data Science.
 
-Ma carrière a commencé en tant que Data Analyst, où j'ai passé quatre ans à manier des données avec SQL et Excel. Une période d'apprentissage intense, me donnant une appréciation profonde pour l'art et la science de la transformation des données brutes en informations significatives.
+My career started as a Data Analyst, where I spent four years handling data with SQL and Excel. It was an intense learning period that gave me a deep appreciation for the art and science of transforming raw data into meaningful insights.
 
-Ensuite, j'ai eu l'opportunité d'approfondir ma compréhension de la Data Science en tant que **Data Scientist** chez OVH, un leader mondial des services de cloud computing. C'était une période de croissance et d'innovation, où j'ai acquis une expérience précieuse dans l'application de techniques avancées d'IA pour aider à résoudre des problèmes complexes.
+Next, I had the opportunity to deepen my understanding of Data Science as a **Data Scientist** at OVH, a global leader in cloud computing services. It was a period of growth and innovation, where I gained valuable experience in applying advanced AI techniques to help solve complex problems.
 
-En 2019, j'ai décidé de canaliser mon expertise et mon enthousiasme pour la Data Science dans la création de ma propre entreprise, Labs On Mars (Co-fondateur). Nous opérions à l'intersection de l'intelligence artificielle et du SEO, aidant nos clients à tirer le meilleur parti de leurs données pour améliorer leur visibilité en ligne. Suite à cette expérience, je suis devenu Senior Data Scientist en Freelance.
+In 2019, I decided to channel my expertise and enthusiasm for Data Science into founding my own company, Labs On Mars (Co-founder). We operated at the intersection of artificial intelligence and SEO, helping our clients make the most of their data to improve their online visibility. Following this experience, I became a Senior Data Scientist Freelance.
 
-Parallèlement à mon travail de Data Scientist, j'ai également pris le rôle de formateur et de **mentor** depuis 2017. Cette expérience m'a donné l'occasion d'accompagner de nombreux aspirants Data Scientists, partageant avec eux les connaissances et les compétences que j'ai acquises tout au long de ma carrière. J'ai été témoin du pouvoir transformationnel de l'éducation, et j'ai été inspiré par l'énergie et la curiosité de ceux que j'ai eu le privilège de guider.
+In parallel to my work as a Data Scientist, I have also taken on the role of a trainer and **mentor** since 2017. This experience has given me the opportunity to guide many aspiring Data Scientists, sharing with them the knowledge and skills I have acquired throughout my career. I have witnessed the transformational power of education and have been inspired by the energy and curiosity of those I have had the privilege to mentor.
 
-En partageant mon parcours et mes conseils à travers ce blog, j'espère vous inspirer et vous aider à tracer votre propre chemin dans le monde de la Data Science. Quel que soit le stade de votre carrière, je crois fermement que vous pouvez toujours apprendre et grandir. Alors, allons-y ensemble. Bienvenue dans ce voyage passionnant vers la maîtrise de la Data Science!
+By sharing my journey and insights through this blog, I hope to inspire you and help you carve your own path in the world of Data Science. No matter where you are in your career, I firmly believe that you can always learn and grow. So, let’s embark on this exciting journey together. Welcome to the journey towards mastering Data Science!
 
-Responsable: Julien
-Créée le: 19 juillet 2023 15:48
+Author: Julien
+Created on: July 19, 2023, 3:48 PM
