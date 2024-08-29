@@ -3,8 +3,7 @@ title: "ZenML Pipeline Tutorial Part 3: Understanding Artefacts and Adding Infer
 date: 2024-08-29
 draft: false
 ---
-
-# Introduction
+## Introduction
 
 In this tutorial, we will dive deep into the concept of artefacts in ZenML pipelines. We’ll explain how to define and use them, with a focus on the newly added inference step in an existing pipeline. 
 
