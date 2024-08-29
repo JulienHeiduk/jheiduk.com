@@ -1,5 +1,5 @@
 ---
-title: "Adding MLflow to a ZenML Pipeline"
+title: "ZenML Pipeline Tutorial Part 2: Adding MLflow to a ZenML Pipeline"
 date: 2024-08-16
 draft: false
 ---
