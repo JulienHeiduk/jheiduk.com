@@ -1,6 +1,6 @@
 ---
 title: "ZenML Pipeline Tutorial Part 3: Understanding Artefacts and Adding Inference Steps"
-date: 2024-08-16
+date: 2024-08-29
 draft: false
 ---
 
