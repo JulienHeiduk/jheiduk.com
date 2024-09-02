@@ -19,7 +19,7 @@ summaryLength = 70
 
   avatar = 'julien.heiduk@gmail.com'                 # gravatar email or image url
   name = 'Julien Heiduk'
-  bio = "Let's talk about recommander systems and ML in productions!"
+  bio = "Let's talk about recommandation systems and ML in real-world business scenarios."
    
   [blog]
     showSummary = true  
