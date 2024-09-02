@@ -17,6 +17,10 @@ paginate = 5
   linkedin = 'julien-heiduk'             # linkedin.com/in/YOUR_LINKEDIN_ID
   rss = true                                # show rss icon
 
+  avatar = 'julien.heiduk@gmail.com'                 # gravatar email or image url
+  name = 'Julien Heiduk'
+  bio = "Let's talk about recommender systems and ML in productions!"
+  
 [languages]
   [languages.en]
     languageName = "English"
