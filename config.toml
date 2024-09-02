@@ -18,8 +18,22 @@ paginate = 5
 
   avatar = 'julien.heiduk@gmail.com'                 # gravatar email or image url
   name = 'Julien Heiduk'
-  bio = "Let's talk about recommender systems and ML in productions!"
+  bio = "Let's talk about recommander systems and ML in productions!"
   
+[menu]
+
+  [[menu.main]]
+    identifier = "training"
+    name = "Training"
+    url = "https://cours.campuz.fr/"
+    weight = 10
+
+  [[menu.main]]
+    identifier = "about"
+    name = "About"
+    url = "https://jheiduk.com/posts/introduction/"
+    weight = 10    
+
 [languages]
   [languages.en]
     languageName = "English"
