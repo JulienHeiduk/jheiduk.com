@@ -172,9 +172,3 @@ This screenshot shows a ZenML pipeline run overview, highlighting the successful
 ### Conclusion
 
 Congratulations! You have successfully set up and run a basic machine learning pipeline using ZenML. This tutorial demonstrated how to define a pipeline, load data, train a model, and evaluate its performance. You can extend this pipeline by adding more steps, integrating different models, or experimenting with other datasets. You can find the repository here: https://github.com/JulienHeiduk/zenml-ml. Happy coding!
-
-<!--more-->
-
-The tutorial guides users on building a machine learning pipeline with ZenML, focusing on data loading, model training, and evaluation. It highlights how to structure and run pipelines efficiently, using the Iris dataset and a RandomForestClassifier.
-
-# more
