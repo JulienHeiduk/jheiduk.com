@@ -2,36 +2,27 @@ baseurl = "/"
 languageCode = "en-us"
 theme = "paper-new"
 paginate = 5
-[params]
-  # color style
-  color = 'light'                           # linen, wheat, gray, light
 
-  # header social icons
-  #twitter = 'YOUR_TWITTER_ID'               # twitter.com/YOUR_TWITTER_ID
-  #github = 'YOUR_GITHUB_ID'                 # github.com/YOUR_GITHUB_ID
-  #instagram = 'YOUR_INSTAGRAM_ID'           # instagram.com/YOUR_INSTAGRAM_ID
-  #linkedin = 'YOUR_LINKEDIN_ID'             # linkedin.com/in/YOUR_LINKEDIN_ID
-  #mastodon = 'YOUR_MASTODON_LINK'           # e.g. 'https://mastodon.instance/@xxx'
-  #rss = true                                # show rss icon
+params:
+  profileMode:
+    enabled: true
+    title: "<Title>" # optional default will be site title
+    subtitle: "This is subtitle"
+    imageUrl: "<image link>" # optional
+    imageTitle: "<title of image as alt>" # optional
+    imageWidth: 120 # custom size
+    imageHeight: 120 # custom size
+    buttons:
+      - name: Archive
+        url: "/archive"
+      - name: Github
+        url: "https://github.com/"
 
-  # home page profile
-  #avatar = 'GRAVATAR_EMAIL'                 # gravatar email or image url
-  #name = 'YOUR_NAME'
-  #bio = 'YOUR_BIO'
-
-
-  # misc
-  disableHLJS = true                        # disable highlight.js
-  monoDarkIcon = true                       # show monochrome dark mode icon
-  #gravatarCdn = 'GRAVATAR_CDN_LINK'         # e.g. 'https://cdn.v2ex.com/gravatar/'
-  #graphCommentId = "YOUR_GRAPH_COMMENT_ID"  # use graph comment (disqus alternative)
-  math = true                               # enable KaTex math typesetting globally
-#[params.twitter]
-  # set Twitter handles for Twitter cards
-  # see https://developer.twitter.com/en/docs/tweets/optimize-with-cards/guides/getting-started#card-and-content-attribution
-  # do not include @
- # creator = ""
- # site = ""
+  socialIcons: # optional
+    - name: "<platform>"
+      url: "<link>"
+    - name: "<platform 2>"
+      url: "<link2>"
 
 [languages]
   [languages.en]
@@ -56,3 +47,4 @@ paginate = 5
 #        identifier = "about"
 #        name = "About"
 #        url = "/about"
+
