@@ -2,7 +2,7 @@ baseurl = "/"
 languageCode = "en-us"
 theme = "paper-new"
 paginate = 5
-summary = "summaryLength (20)"
+summaryLength = 70
 
 [params]
   # color style
