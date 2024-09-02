@@ -2,6 +2,7 @@ baseurl = "/"
 languageCode = "en-us"
 theme = "paper-new"
 paginate = 5
+summary = "summaryLength (20)"
 
 [params]
   # color style
@@ -19,8 +20,6 @@ paginate = 5
   avatar = 'julien.heiduk@gmail.com'                 # gravatar email or image url
   name = 'Julien Heiduk'
   bio = "Let's talk about recommander systems and ML in productions!"
-
-  summary = "summaryLength (20)"
    
   [blog]
     showSummary = true  
