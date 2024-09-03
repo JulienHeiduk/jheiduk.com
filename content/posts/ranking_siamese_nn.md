@@ -2,7 +2,7 @@
 title: "Product Recommendation in Retail"
 date: 2023-09-11
 draft: false
-summary: "In this first article, we will study the method proposed by Home Depot to recommend products on each product page."
+summary: "In this first article, we will study the method proposed by Home Depot to recommend products on each product page. The recommender system proposed in this research paper is characterized a Item-to-Item..."
 ---
 
 ## Context
