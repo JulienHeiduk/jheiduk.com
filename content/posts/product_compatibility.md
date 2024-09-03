@@ -2,7 +2,7 @@
 title: "Manage Product Compatibility with Machine Learning"
 date: 2024-05-23
 draft: false
-summary: "he paper "Adaptive Multi-view Rule Discovery for Weakly-Supervised Compatible Products Prediction" by Rongzhi Zhang..."
+summary: "The paper Adaptive Multi-view Rule Discovery for Weakly-Supervised Compatible Products Prediction by Rongzhi Zhang..."
 ---
 
 ## Context
