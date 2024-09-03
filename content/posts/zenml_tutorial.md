@@ -2,7 +2,6 @@
 title: "ZenML Pipeline Tutorial Part 1: How to Use ZenML for Building a Machine Learning Pipeline"
 date: 2024-08-15
 draft: false
-summary: "Hello world!"
 ---
 ## Introduction
 
