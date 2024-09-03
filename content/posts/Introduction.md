@@ -2,6 +2,7 @@
 title: "Introduction"
 date: 2023-08-01
 draft: false
+summary: "Welcome to the exciting world of Data Science, where data is our language and artificial intelligence is our primary tool..."
 ---
 
 Welcome to the exciting world of Data Science, where data is our language and artificial intelligence is our primary tool to decipher that language. I am thrilled that you are here, ready to dive into the vast ocean of information and knowledge. Before we begin, let me share a bit of my story and why I created this blog.
