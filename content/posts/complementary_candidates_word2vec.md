@@ -2,7 +2,7 @@
 title: "Complementary Candidate Generator with Word2Vec"
 date: 2024-01-15
 draft: false
-summary: "Candidate generation is the first step in a "Multi-Stage" recommendation system."
+summary: "Candidates generation is the first step in a Multi-Stage recommendation system."
 ---
 
 ## Context
@@ -19,7 +19,7 @@ summary: "Candidate generation is the first step in a "Multi-Stage" recommendati
 
 ## Introduction
 
-Candidate generation is the first step in a "Multi-Stage" recommendation system. In this article, we will present a method for generating complementary candidates for a product. While there are numerous research papers or articles focused on generating similar candidates, there are far fewer that address a complementary approach.
+Candidates generation is the first step in a "Multi-Stage" recommendation system. In this article, we will present a method for generating complementary candidates for a product. While there are numerous research papers or articles focused on generating similar candidates, there are far fewer that address a complementary approach.
 
 Before diving into the specifics, let’s first define what a complementary candidate is. We define complementarity as follows: a candidate is complementary to a product if, in practice, it is often purchased together with this main product due to its complementary nature. The "complementary candidate" is a product that, by its function or use, naturally combines with the main product. This represents an intrinsic relationship between the two products.
 
