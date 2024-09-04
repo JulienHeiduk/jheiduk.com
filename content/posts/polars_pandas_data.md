@@ -215,6 +215,3 @@ Here, Polars is nearly twice as fast as Pandas in performing the groupby operati
 Through this tutorial, you have seen how Polars not only offers a powerful alternative to Pandas for handling large datasets but also provides an opportunity for better performance. In every task — reading CSV files, adding columns, filtering, and grouping — Polars consistently outperformed Pandas, making it a robust choice for data manipulation.
 
 In our benchmark Polars is the winner with 3 points vs 1 for Pandas. We are going to go further in the next article.
-
-**Next Steps**
-As you progress in your data science journey, consider incorporating Polars into your workflow for better efficiency, especially when dealing with large datasets. Let's talk about more advanced features in the next article.
