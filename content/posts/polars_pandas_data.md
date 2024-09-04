@@ -1,6 +1,6 @@
 ---
 title: "Polars Tutorial Part 1: Efficient Data Manipulation Compared to Pandas"
-date: 2024-08-15
+date: 2024-09-04
 draft: false
 summary: "Polars offers a faster and more memory-efficient alternative to Pandas for data manipulation tasks, particularly with large datasets, due to its use of parallel processing, lazy evaluation, and Arrow memory format, making it an ideal tool for data engineers and scientists seeking enhanced performance."
 ---
