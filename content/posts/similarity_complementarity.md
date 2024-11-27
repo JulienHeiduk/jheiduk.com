@@ -5,7 +5,7 @@ draft: false
 summary: "Generation similar and complementary words."
 ---
 
-# Tutorial: Using Word2Vec for Finding Similar and Complementary Words
+## Tutorial: Using Word2Vec for Finding Similar and Complementary Words
 
 In this tutorial, we'll explore how to leverage Word2Vec to find words that are similar or complementary. We'll discuss two specific approaches - the IN-OUT approach and the OUT-OUT approach - both of which are useful for various applications, including recommender systems. Our dataset consists of a subset of Wikipedia articles in French, and we'll guide you through the process of training a Word2Vec model and running inference to discover relatedness among words.
 
@@ -163,9 +163,11 @@ for idx, distance in zip(indices_out_out[0], distances_out_out[0]):
 The image above showcases the results obtained using both the IN-OUT and OUT-OUT approaches to analyze the word "français."
 
 ### IN-OUT Approach: Finding Complementary Words
+
 This approach identifies the words that are likely to co-occur with "français" in complementary contexts. For instance, the top complementary words include terms like Résistant, Auteur-compositeur-interprète, and Essayiste. Each word is assigned a complementarity score, with Résistant having the highest score of approximately 0.086, indicating a strong complementary relationship.
 
-###  OUT-OUT Approach: Finding Similar Words
+### OUT-OUT Approach: Finding Similar Words
+
 Using the OUT-OUT approach, we determine the words that are semantically similar to "français." The results include words like néerlandais, polonais, and portugais, with similarity scores provided. As expected, français itself has the highest similarity score of 0.999, while other languages are also closely related, reflecting their conceptual proximity in the dataset.
 
 These results illustrate how Word2Vec can be used not only to find similar words but also to discover words that frequently co-occur in complementary ways, which can be invaluable for tasks such as product recommendation or content generation.
