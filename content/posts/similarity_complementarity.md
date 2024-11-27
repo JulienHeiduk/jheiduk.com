@@ -158,7 +158,7 @@ for idx, distance in zip(indices_out_out[0], distances_out_out[0]):
 
 ## Example Output: Complementary and Similar Words for "français"
 
-![Article_cpl_example](/Article_cpl_example.png)
+![Article_cpl_example.png](/Article_cpl_example.png)
 
 The image above showcases the results obtained using both the IN-OUT and OUT-OUT approaches to analyze the word "français."
 
