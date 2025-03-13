@@ -1,6 +1,6 @@
 ---
 title: "Graph Embeddings with Cleora"
-date: 2024-03-13
+date: 2025-03-13
 draft: false
 summary: "In the realm of data science, understanding relationships among entities is critical. Cleora shines in this context by efficiently modeling relationships"
 ---
@@ -107,15 +107,5 @@ Cleora’s efficient approach to embedding heterogeneous data opens up a plethor
 
 - **Protein-Protein Interactions**: In bioinformatics, Cleora can model complex interaction networks of proteins, helping to predict novel interactions and understand mechanisms of diseases.
 - **Genetic Networks**: Cleora's ability to handle hypergraphs allows for the exploration of interactions among genes, environmental factors, and diseases, advancing research in personalized medicine.
-
-### 5. E-commerce Analytics
-
-- **Customer Segmentation**: Cleora embeddings can be leveraged to segment customers based on purchasing patterns and interactions, providing insights for targeted marketing strategies.
-- **Supply Chain Optimization**: By embedding relational data involving suppliers, products, and logistics, Cleora aids in optimizing supply chain operations and identifying bottlenecks.
-
-### 6. Natural Language Processing (NLP)
-
-- **Multi-view Text Embeddings**: When coupled with text data, Cleora embeds various representations of textual information in conjunction with interaction data, enriching NLP applications such as sentiment analysis and topic modeling.
-- **Entity Resolution**: For entity resolution tasks where entities need to be interlinked across different datasets, Cleora provides a robust mechanism for deduplicating and merging entity identities.
 
 In summary, Cleora embeddings offer a versatile and scalable solution for modeling and analyzing complex relationships in diverse datasets. Its speed, stability, and compatibility across different data types make Cleora a valuable tool for tackling real-world challenges in numerous data-driven applications.
