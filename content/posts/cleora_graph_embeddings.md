@@ -84,6 +84,9 @@ The trained embeddings represent entities within the graph. The process includes
 3. L2-normalization to maintain consistency.
 4. Parallel execution to accelerate the training process.
 
+![graph_embeddings](/graph_embeddings.png)  
+*Source: [nebula-graph](https://www.nebula-graph.io/posts/graph-embeddings)*
+
 ### Memory Considerations
 
 Efficient memory usage is critical, particularly through the use of custom sparse matrix structures that save space by storing only nonzero entities.
