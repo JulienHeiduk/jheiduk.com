@@ -24,7 +24,13 @@ For Cleora to operate, it must convert these hyperedges into standard edges, a p
 
 1. **Clique Expansion**: Here, each hyperedge is transformed into a clique, meaning every pair of nodes in a hyperedge is directly connected. While this can create many edges, it offers a more nuanced representation of relationships.
 
+![hyper_clique](/hyper_clique.png)  
+*Source: [Springer](https://link.springer.com/chapter/10.1007/978-981-99-0185-2_2)*
+
 2. **Star Expansion**: A simpler strategy where a new node connects to all original nodes in a hyperedge, saving on the number of edges created but still preserving relationships.
+
+![hyper_star](/hyper_star.png)  
+*Source: [Springer](https://link.springer.com/chapter/10.1007/978-981-99-0185-2_2)*
 
 ## 2. Cleora Embeddings
 
