@@ -114,7 +114,7 @@ with open(movie_lp_test_filename, "w") as f_test:
 ### Explanation
 1. **Data Loading**: Load the MovieLens dataset into a DataFrame. This structured format allows for efficient data manipulation and analysis.
 2. **User-Movie Interaction**: Create a user-movie interaction file to represent each user's interactions with movies, which is essential for graph-based embedding generation.
-3. **Clique Expansion**: Format the data as cliques for Cleora input, creating both training and testing files from the user-movie interactions. This process involves creating a fully connected subgraph of movies for each user, which Cleora will use to learn embeddings.
+3. **Clique Expansion**: Format the data as cliques for Cleora input, creating both training and testing files from the user-movie interactions. This process involves creating a fully connected subgraph of movies for each user, which Cleora will use to learn embeddings. You can learn more about clique expansion [here](https://jheiduk.com/posts/cleora_graph_embeddings/).
 
 ### Alternatives and Suggestions
 - **Alternative Aggregation Strategies**: Consider different strategies for aggregating movie embeddings into user embeddings, such as using a weighted mean based on ratings or applying more complex neural network-based aggregators.
@@ -230,4 +230,4 @@ assert user_emb.shape[0] == len(train['id_1'].unique())
 
 ## Conclusion
 
-In this tutorial, we walked through the entire pipeline of generating user embeddings using the MovieLens 100k dataset and Cleora. By following these steps, you can replicate the process and explore further enhancements or applications of user embeddings in your projects. Happy coding!
+In this tutorial, we walked through the entire pipeline of generating user embeddings using the MovieLens 100k dataset and Cleora. By following these steps, you can replicate the process and explore further enhancements or applications of user embeddings in your projects. In the next articles we are going to see how to user embeddings to create a recommender systems with unsupervised approach and with a supervised approach.
