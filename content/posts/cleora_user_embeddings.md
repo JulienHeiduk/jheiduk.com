@@ -1,5 +1,5 @@
 ---
-title: "Cleora part 2 - How to create user embeddings?"
+title: "Cleora part 2: How to create user embeddings?"
 date: 2025-04-17
 draft: false
 summary: "This tutorial explores how to generate user embeddings from interaction data using Cleora, a high-performance graph embedding tool — ideal for recommendation systems and graph-based machine learning."
