@@ -1,5 +1,5 @@
 ---
-title: "Graph Embeddings with Cleora"
+title: "Cleora part 1: Graph Embeddings"
 date: 2025-03-13
 draft: false
 summary: "In the realm of data science, understanding relationships among entities is critical. Cleora shines in this context by efficiently modeling relationships"
