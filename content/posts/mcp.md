@@ -1,8 +1,8 @@
 ---
-title: "Tutorial - MCP server"
+title: "Model Context Protocol server with FastMCP"
 date: 2025-05-12
 draft: false
-summary: "This tutorial explores how to create a MCP server with fastmcp and why use it."
+summary: "This tutorial explores how to create a MCP server with FastMCP and why use it."
 ---
 
 ## Creating Your First MCP Server with FastMCP
