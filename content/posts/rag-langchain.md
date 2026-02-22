@@ -24,7 +24,7 @@ A RAG system has two distinct phases.
 4. Call the LLM and return its answer.
 
 <!-- Diagram: Two-column flow diagram. Left column "Indexing": Documents → Text Splitter → Embeddings → Vector Store. Right column "Querying": User Question → Embeddings → Vector Store (retrieve top-k) → Prompt Template + LLM → Answer. An arrow labelled "shared vector store" connects the two columns. -->
-![rag-architecture](/rag-architecture.svg)
+![rag-architecture](/rag-architecture.png)
 *Figure: RAG indexing pipeline (left) and query pipeline (right).*
 
 The retrieval step is what keeps answers grounded: the LLM can only say what the retrieved passages allow.
