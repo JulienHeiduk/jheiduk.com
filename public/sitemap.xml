@@ -2,56 +2,56 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>/posts/gcn-pytorch-recommendation/</loc>
+    <loc>//localhost:55076/posts/gcn-pytorch-recommendation/</loc>
     <lastmod>2026-02-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/</loc>
+    <loc>//localhost:55076/</loc>
     <lastmod>2026-02-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/</loc>
+    <loc>//localhost:55076/posts/</loc>
     <lastmod>2026-02-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/rag-langchain/</loc>
+    <loc>//localhost:55076/posts/rag-langchain/</loc>
     <lastmod>2026-02-22T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/mcp/</loc>
+    <loc>//localhost:55076/posts/mcp/</loc>
     <lastmod>2025-05-12T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/cleora_user_embeddings/</loc>
+    <loc>//localhost:55076/posts/cleora_user_embeddings/</loc>
     <lastmod>2025-04-17T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/cleora_graph_embeddings/</loc>
+    <loc>//localhost:55076/posts/cleora_graph_embeddings/</loc>
     <lastmod>2025-03-13T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/similarity_complementarity/</loc>
+    <loc>//localhost:55076/posts/similarity_complementarity/</loc>
     <lastmod>2024-11-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/polars_pandas_data/</loc>
+    <loc>//localhost:55076/posts/polars_pandas_data/</loc>
     <lastmod>2024-09-04T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/zenml_artifacts/</loc>
+    <loc>//localhost:55076/posts/zenml_artifacts/</loc>
     <lastmod>2024-08-29T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/zenml_mlflow/</loc>
+    <loc>//localhost:55076/posts/zenml_mlflow/</loc>
     <lastmod>2024-08-16T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/zenml_tutorial/</loc>
+    <loc>//localhost:55076/posts/zenml_tutorial/</loc>
     <lastmod>2024-08-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/product_compatibility/</loc>
+    <loc>//localhost:55076/posts/product_compatibility/</loc>
     <lastmod>2024-05-23T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/complementary_candidates_word2vec/</loc>
+    <loc>//localhost:55076/posts/complementary_candidates_word2vec/</loc>
     <lastmod>2024-01-15T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/ranking_siamese_nn/</loc>
+    <loc>//localhost:55076/posts/ranking_siamese_nn/</loc>
     <lastmod>2023-09-11T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/posts/introduction/</loc>
+    <loc>//localhost:55076/posts/introduction/</loc>
     <lastmod>2023-08-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>/categories/</loc>
+    <loc>//localhost:55076/categories/</loc>
   </url><url>
-    <loc>/tags/</loc>
+    <loc>//localhost:55076/tags/</loc>
   </url>
 </urlset>

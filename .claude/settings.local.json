@@ -3,7 +3,12 @@
     "allow": [
       "Bash(cd:*)",
       "Bash(which hugo || ls /mnt/c/Users/julie/AppData/Local/Programs/ 2>/dev/null | head -10 || powershell.exe -command \"Get-Command hugo\" 2>/dev/null)",
-      "Bash(head:*)"
+      "Bash(head:*)",
+      "Bash(cd /c/Users/julie/jheiduk.com && git add -v layouts/ assets/ 2>&1)",
+      "Bash(echo exit: $?:*)",
+      "Bash(cd /c/Users/julie/jheiduk.com && git add \"layouts/_default/list.html\" \"assets/custom.css\" 2>&1 && git status 2>&1)",
+      "Bash(cd /c/Users/julie/jheiduk.com && hugo 2>&1)",
+      "Bash(ls:*)"
     ]
   }
 }
