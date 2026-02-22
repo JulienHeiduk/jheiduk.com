@@ -2,7 +2,8 @@
   "permissions": {
     "allow": [
       "Bash(cd:*)",
-      "Bash(which hugo || ls /mnt/c/Users/julie/AppData/Local/Programs/ 2>/dev/null | head -10 || powershell.exe -command \"Get-Command hugo\" 2>/dev/null)"
+      "Bash(which hugo || ls /mnt/c/Users/julie/AppData/Local/Programs/ 2>/dev/null | head -10 || powershell.exe -command \"Get-Command hugo\" 2>/dev/null)",
+      "Bash(head:*)"
     ]
   }
 }

@@ -1,0 +1,452 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fff"
+  lang="en"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>GCN with PyTorch for Co-Purchase Recommendation - Julien Heiduk</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  <meta name="description" content="Graph Convolutional Networks turn co-purchase data into a graph and learn item embeddings for recommendation. A full PyTorch Geometric implementation included." />
+  <meta name="author" content="Julien Heiduk" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="//localhost:1313/main.min.css" />
+
+  
+
+  
+     
+  <link rel="preload" as="image" href="//localhost:1313/theme.svg" />
+
+  
+  
+  
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/9d9b1fb5a77c392055d3adf9382ba7f5?s=160&amp;d=identicon" />
+  
+  
+
+  
+  <link rel="preload" as="image" href="//localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="//localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  </head>
+  ...
+</html>
+
+  
+  
+  
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+      });
+  </script>
+  
+  <link rel="icon" href="//localhost:1313/favicon.ico" />
+  <link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.128.0">
+
+  
+  
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="//localhost:1313/"
+      >Julien Heiduk</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fff'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://jheiduk.com/posts/introduction/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://cours.campuz.fr/"
+        >Training</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/JulienHeiduk"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/julien-heiduk"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">GCN with PyTorch for Co-Purchase Recommendation</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Feb 22, 2026</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><p>Collaborative filtering captures what users like; <strong>Graph Convolutional Networks (GCN)</strong> capture how items relate to each other. When two products are frequently bought together, that co-purchase signal is an edge in a graph. A GCN trained on that graph learns item embeddings that encode neighbourhood structure — items in the same buying context end up geometrically close. This article explains how GCNs work, then walks through a complete PyTorch Geometric implementation for item-to-item recommendation.</p>
+<h2 id="1-how-gcns-propagate-information">1. How GCNs Propagate Information</h2>
+<p>A GCN stacks layers that each perform one round of <strong>message passing</strong>: every node aggregates the feature vectors of its neighbours, transforms them with a learned weight matrix, and applies a non-linearity. After $L$ layers, each node&rsquo;s representation encodes information from its $L$-hop neighbourhood.</p>
+<p>The propagation rule for layer $l$ is:</p>
+<p>$$H^{(l+1)} = \sigma!\left(\hat{A},H^{(l)},W^{(l)}\right)$$</p>
+<p>where:</p>
+<ul>
+<li>$H^{(l)} \in \mathbb{R}^{n \times d}$ — node feature matrix at layer $l$</li>
+<li>$W^{(l)}$ — trainable weight matrix</li>
+<li>$\sigma$ — non-linear activation (ReLU)</li>
+<li>$\hat{A} = \tilde{D}^{-1/2}\tilde{A}\tilde{D}^{-1/2}$ — symmetrically normalised adjacency</li>
+</ul>
+<p>$\tilde{A} = A + I$ adds self-loops so each node also retains its own features. $\tilde{D}$ is the diagonal degree matrix of $\tilde{A}$. The normalisation prevents the aggregated sum from growing with node degree.</p>
+<!-- raw HTML omitted -->
+<p><img alt="gcn-message-passing" src="/gcn-message-passing.png">
+<em>Figure: Two rounds of message passing turn raw item features into neighbourhood-aware embeddings.</em></p>
+<h2 id="2-co-purchase-graph-construction">2. Co-Purchase Graph Construction</h2>
+<p>Nodes are items. An undirected edge $(i, j)$ exists when items $i$ and $j$ appear together in at least one transaction. Initial node features are <strong>one-hot identity vectors</strong> — a neutral starting point that lets the GCN learn all structure from the graph topology.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> torch
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> torch_geometric.data <span style="color:#f92672">import</span> Data
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>seed(<span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>torch<span style="color:#f92672">.</span>manual_seed(<span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>N_ITEMS <span style="color:#f92672">=</span> <span style="color:#ae81ff">20</span>  <span style="color:#75715e"># toy catalogue of 20 items</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Simulate co-purchases: items in the same &#34;category&#34; (0–6, 7–13, 14–19)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># are bought together with probability 0.7; cross-category with 0.05.</span>
+</span></span><span style="display:flex;"><span>edges <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(N_ITEMS):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, N_ITEMS):
+</span></span><span style="display:flex;"><span>        same_cat <span style="color:#f92672">=</span> (i <span style="color:#f92672">//</span> <span style="color:#ae81ff">7</span>) <span style="color:#f92672">==</span> (j <span style="color:#f92672">//</span> <span style="color:#ae81ff">7</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> np<span style="color:#f92672">.</span>random<span style="color:#f92672">.</span>random() <span style="color:#f92672">&lt;</span> (<span style="color:#ae81ff">0.7</span> <span style="color:#66d9ef">if</span> same_cat <span style="color:#66d9ef">else</span> <span style="color:#ae81ff">0.05</span>):
+</span></span><span style="display:flex;"><span>            edges<span style="color:#f92672">.</span>extend([[i, j], [j, i]])  <span style="color:#75715e"># undirected → both directions</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>edge_index <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>tensor(edges, dtype<span style="color:#f92672">=</span>torch<span style="color:#f92672">.</span>long)<span style="color:#f92672">.</span>t()<span style="color:#f92672">.</span>contiguous()
+</span></span><span style="display:flex;"><span>x <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>eye(N_ITEMS, dtype<span style="color:#f92672">=</span>torch<span style="color:#f92672">.</span>float)  <span style="color:#75715e"># one-hot node features</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> Data(x<span style="color:#f92672">=</span>x, edge_index<span style="color:#f92672">=</span>edge_index, num_nodes<span style="color:#f92672">=</span>N_ITEMS)
+</span></span><span style="display:flex;"><span>print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Nodes: </span><span style="color:#e6db74">{</span>data<span style="color:#f92672">.</span>num_nodes<span style="color:#e6db74">}</span><span style="color:#e6db74"> | Edges: </span><span style="color:#e6db74">{</span>data<span style="color:#f92672">.</span>num_edges<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h2 id="3-gcn-encoder">3. GCN Encoder</h2>
+<p>A two-layer GCN maps the $N \times N$ identity matrix to $N \times 32$ embeddings. The first layer expands into a hidden space; the second projects to the final embedding dimension.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> torch.nn <span style="color:#66d9ef">as</span> nn
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> torch.nn.functional <span style="color:#66d9ef">as</span> F
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> torch_geometric.nn <span style="color:#f92672">import</span> GCNConv
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GCNEncoder</span>(nn<span style="color:#f92672">.</span>Module):
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> __init__(self, in_channels: int, hidden: int, out_channels: int):
+</span></span><span style="display:flex;"><span>        super()<span style="color:#f92672">.</span>__init__()
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>conv1 <span style="color:#f92672">=</span> GCNConv(in_channels, hidden)
+</span></span><span style="display:flex;"><span>        self<span style="color:#f92672">.</span>conv2 <span style="color:#f92672">=</span> GCNConv(hidden, out_channels)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">forward</span>(self, x, edge_index):
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>relu(self<span style="color:#f92672">.</span>conv1(x, edge_index))
+</span></span><span style="display:flex;"><span>        x <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>dropout(x, p<span style="color:#f92672">=</span><span style="color:#ae81ff">0.3</span>, training<span style="color:#f92672">=</span>self<span style="color:#f92672">.</span>training)  <span style="color:#75715e"># regularise</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>conv2(x, edge_index)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model <span style="color:#f92672">=</span> GCNEncoder(in_channels<span style="color:#f92672">=</span>N_ITEMS, hidden<span style="color:#f92672">=</span><span style="color:#ae81ff">64</span>, out_channels<span style="color:#f92672">=</span><span style="color:#ae81ff">32</span>)
+</span></span></code></pre></div><h2 id="4-training-with-link-prediction">4. Training with Link Prediction</h2>
+<p>The task is <strong>link prediction</strong>: the model should score real co-purchase pairs higher than random pairs. For each training step, <code>negative_sampling</code> draws item pairs that share no edge. The objective is binary cross-entropy on dot-product scores.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> torch_geometric.utils <span style="color:#f92672">import</span> negative_sampling
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>optimizer <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>optim<span style="color:#f92672">.</span>Adam(model<span style="color:#f92672">.</span>parameters(), lr<span style="color:#f92672">=</span><span style="color:#ae81ff">0.01</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">bce_link_loss</span>(z, pos_edge_index, neg_edge_index):
+</span></span><span style="display:flex;"><span>    pos_score <span style="color:#f92672">=</span> (z[pos_edge_index[<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">*</span> z[pos_edge_index[<span style="color:#ae81ff">1</span>]])<span style="color:#f92672">.</span>sum(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    neg_score <span style="color:#f92672">=</span> (z[neg_edge_index[<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">*</span> z[neg_edge_index[<span style="color:#ae81ff">1</span>]])<span style="color:#f92672">.</span>sum(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>    scores <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>cat([pos_score, neg_score])
+</span></span><span style="display:flex;"><span>    labels <span style="color:#f92672">=</span> torch<span style="color:#f92672">.</span>cat([
+</span></span><span style="display:flex;"><span>        torch<span style="color:#f92672">.</span>ones(pos_score<span style="color:#f92672">.</span>size(<span style="color:#ae81ff">0</span>)),
+</span></span><span style="display:flex;"><span>        torch<span style="color:#f92672">.</span>zeros(neg_score<span style="color:#f92672">.</span>size(<span style="color:#ae81ff">0</span>)),
+</span></span><span style="display:flex;"><span>    ])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> F<span style="color:#f92672">.</span>binary_cross_entropy_with_logits(scores, labels)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>model<span style="color:#f92672">.</span>train()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> epoch <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">301</span>):
+</span></span><span style="display:flex;"><span>    optimizer<span style="color:#f92672">.</span>zero_grad()
+</span></span><span style="display:flex;"><span>    z <span style="color:#f92672">=</span> model(data<span style="color:#f92672">.</span>x, data<span style="color:#f92672">.</span>edge_index)
+</span></span><span style="display:flex;"><span>    neg_edge <span style="color:#f92672">=</span> negative_sampling(
+</span></span><span style="display:flex;"><span>        edge_index<span style="color:#f92672">=</span>data<span style="color:#f92672">.</span>edge_index,
+</span></span><span style="display:flex;"><span>        num_nodes<span style="color:#f92672">=</span>N_ITEMS,
+</span></span><span style="display:flex;"><span>        num_neg_samples<span style="color:#f92672">=</span>data<span style="color:#f92672">.</span>edge_index<span style="color:#f92672">.</span>size(<span style="color:#ae81ff">1</span>),  <span style="color:#75715e"># 1:1 positive/negative ratio</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>    loss <span style="color:#f92672">=</span> bce_link_loss(z, data<span style="color:#f92672">.</span>edge_index, neg_edge)
+</span></span><span style="display:flex;"><span>    loss<span style="color:#f92672">.</span>backward()
+</span></span><span style="display:flex;"><span>    optimizer<span style="color:#f92672">.</span>step()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> epoch <span style="color:#f92672">%</span> <span style="color:#ae81ff">100</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>:
+</span></span><span style="display:flex;"><span>        print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Epoch </span><span style="color:#e6db74">{</span>epoch<span style="color:#e6db74">:</span><span style="color:#e6db74">3d</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> | Loss: </span><span style="color:#e6db74">{</span>loss<span style="color:#f92672">.</span>item()<span style="color:#e6db74">:</span><span style="color:#e6db74">.4f</span><span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h2 id="5-generating-recommendations">5. Generating Recommendations</h2>
+<p>After training, cosine similarity between embeddings drives recommendations. Known co-purchase neighbours are excluded to surface genuinely new suggestions.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span>model<span style="color:#f92672">.</span>eval()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> torch<span style="color:#f92672">.</span>no_grad():
+</span></span><span style="display:flex;"><span>    embeddings <span style="color:#f92672">=</span> model(data<span style="color:#f92672">.</span>x, data<span style="color:#f92672">.</span>edge_index)
+</span></span><span style="display:flex;"><span>    embeddings <span style="color:#f92672">=</span> F<span style="color:#f92672">.</span>normalize(embeddings, p<span style="color:#f92672">=</span><span style="color:#ae81ff">2</span>, dim<span style="color:#f92672">=-</span><span style="color:#ae81ff">1</span>)  <span style="color:#75715e"># unit vectors → cosine = dot product</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">recommend</span>(item_id: int, embeddings, top_k: int <span style="color:#f92672">=</span> <span style="color:#ae81ff">5</span>) <span style="color:#f92672">-&gt;</span> list[int]:
+</span></span><span style="display:flex;"><span>    scores <span style="color:#f92672">=</span> embeddings <span style="color:#f92672">@</span> embeddings[item_id]   <span style="color:#75715e"># cosine similarity to all items</span>
+</span></span><span style="display:flex;"><span>    scores[item_id] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>                         <span style="color:#75715e"># exclude self</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Mask out existing co-purchase edges</span>
+</span></span><span style="display:flex;"><span>    known <span style="color:#f92672">=</span> data<span style="color:#f92672">.</span>edge_index[<span style="color:#ae81ff">1</span>][data<span style="color:#f92672">.</span>edge_index[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> item_id]
+</span></span><span style="display:flex;"><span>    scores[known] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> scores<span style="color:#f92672">.</span>topk(top_k)<span style="color:#f92672">.</span>indices<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> anchor <span style="color:#f92672">in</span> [<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">14</span>]:
+</span></span><span style="display:flex;"><span>    recs <span style="color:#f92672">=</span> recommend(anchor, embeddings)
+</span></span><span style="display:flex;"><span>    print(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Item </span><span style="color:#e6db74">{</span>anchor<span style="color:#e6db74">:</span><span style="color:#e6db74">2d</span><span style="color:#e6db74">}</span><span style="color:#e6db74"> → top-5 recommendations: </span><span style="color:#e6db74">{</span>recs<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><p>Items 0, 7, and 14 are the respective category anchors. Correct recommendations should surface items from the same category (0–6, 7–13, 14–19).</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>pip install torch torch_geometric numpy
+</span></span></code></pre></div><p>PyTorch Geometric requires matching <code>torch</code> and CUDA versions. Follow the <a href="https://pytorch-geometric.readthedocs.io/en/latest/install/installation.html">official installation guide</a> if the default install fails.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>A two-layer GCN turns a co-purchase graph into item embeddings that reflect buying context. The link prediction objective requires no user data — only item-item co-occurrence signals. This makes it a strong baseline for cold-start scenarios where user histories are sparse.</p>
+<p>Directions for improvement:</p>
+<ul>
+<li><strong>Richer node features</strong>: replace one-hot identity with product text embeddings (e.g., from a sentence transformer) to benefit categories with few co-purchase edges.</li>
+<li><strong>LightGCN</strong>: remove activation functions and weight matrices entirely — the <a href="https://arxiv.org/abs/2002.02126">LightGCN paper</a> shows this simplification improves recommendation quality by reducing overfitting.</li>
+<li><strong>Temporal edges</strong>: weight edges by recency to discount old purchasing patterns.</li>
+</ul>
+<p>For a different graph embedding approach applied to the same recommendation problem, see the article on <a href="https://jheiduk.com/posts/cleora_graph_embeddings/">Cleora graph embeddings</a>.</p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="//localhost:1313/posts/rag-langchain/"
+      ><span>Retrieval-Augmented Generation with LangChain</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2026
+    <a class="link" href="//localhost:1313/">Julien Heiduk</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

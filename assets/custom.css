@@ -1,0 +1,74 @@
+/* ── Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+html {
+  font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+code, kbd, samp, pre {
+  font-family: 'JetBrains Mono', ui-monospace, 'SFMono-Regular', Menlo, Monaco, Consolas, monospace;
+}
+
+/* ── Design tokens ── */
+:root {
+  --accent: #2563eb;
+  --accent-light: #93c5fd;
+}
+
+/* ── Header ── */
+header {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.dark header {
+  border-bottom-color: rgba(255, 255, 255, 0.07);
+}
+
+/* ── Post cards — divider between items ── */
+.post-card + .post-card {
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+  padding-top: 2.5rem;
+  margin-top: 0 !important;
+}
+
+.dark .post-card + .post-card {
+  border-top-color: rgba(255, 255, 255, 0.07);
+}
+
+/* Post title hover accent */
+.post-card h2 {
+  transition: color 0.15s ease;
+}
+
+.post-card:hover h2 {
+  color: var(--accent);
+}
+
+.dark .post-card:hover h2 {
+  color: var(--accent-light);
+}
+
+/* ── Article body links ── */
+.prose a:not([class]) {
+  color: var(--accent);
+  text-decoration-color: rgba(37, 99, 235, 0.35);
+}
+
+.dark .prose a:not([class]) {
+  color: var(--accent-light);
+  text-decoration-color: rgba(147, 197, 253, 0.35);
+}
+
+/* ── Code blocks ── */
+article pre:not(blockquote pre) {
+  border-radius: 0.5rem;
+}
+
+/* ── Footer ── */
+footer {
+  border-top: 1px solid rgba(0, 0, 0, 0.07);
+}
+
+.dark footer {
+  border-top-color: rgba(255, 255, 255, 0.07);
+}

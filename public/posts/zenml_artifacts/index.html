@@ -1,0 +1,479 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fff"
+  lang="en"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>ZenML Pipeline Tutorial Part 3: Understanding Artefacts and Adding Inference Steps - Julien Heiduk</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  <meta name="description" content="In this tutorial, we will dive deep into the concept of artefacts in ZenML pipelines. We’ll explain how to define and use them, with a focus on the newly added inference step in an existing pipeline&hellip;" />
+  <meta name="author" content="Julien Heiduk" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="//localhost:1313/main.min.css" />
+
+  
+
+  
+     
+  <link rel="preload" as="image" href="//localhost:1313/theme.svg" />
+
+  
+  
+  
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/9d9b1fb5a77c392055d3adf9382ba7f5?s=160&amp;d=identicon" />
+  
+  
+
+  
+  <link rel="preload" as="image" href="//localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="//localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  </head>
+  ...
+</html>
+
+  
+  
+  
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+      });
+  </script>
+  
+  <link rel="icon" href="//localhost:1313/favicon.ico" />
+  <link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.128.0">
+
+  
+  
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="//localhost:1313/"
+      >Julien Heiduk</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fff'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://jheiduk.com/posts/introduction/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://cours.campuz.fr/"
+        >Training</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/JulienHeiduk"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/julien-heiduk"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">ZenML Pipeline Tutorial Part 3: Understanding Artefacts and Adding Inference Steps</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Aug 29, 2024</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h2 id="introduction">Introduction</h2>
+<p>In this tutorial, we will dive deep into the concept of artefacts in ZenML pipelines. We’ll explain how to define and use them, with a focus on the newly added inference step in an existing pipeline.</p>
+<h2 id="what-is-an-artefact-in-zenml">What is an Artefact in ZenML?</h2>
+<p>In ZenML, artefacts represent the output of processing steps within a pipeline. These outputs can be various formats such as datasets, models, metrics, or predictions. Artefacts allow you to track these outputs and reuse them across different workflows. By managing artefacts effectively, you can facilitate reproducibility, versioning, and deployment of your machine learning models.</p>
+<h2 id="different-kinds-of-artifact-stores">Different Kinds of Artifact Stores</h2>
+<p>An <strong>artifact store</strong> is a structured repository where artefacts generated during machine learning pipelines are stored. Efficient artifact storage and management are crucial for maintaining a seamless workflow in data science projects. There are several kinds of artifact stores that you can employ based on your requirements:</p>
+<ol>
+<li>
+<p><strong>File-based Artifact Stores</strong>:</p>
+<ul>
+<li>Utilizes local file systems or cloud-based storage solutions like AWS S3, Google Cloud Storage, or Azure Blob Storage.</li>
+<li>Commonly used for storing serialized model files, datasets, and logs in formats such as CSV, JSON, or binary formats.</li>
+</ul>
+</li>
+<li>
+<p><strong>Database-style Artifact Stores</strong>:</p>
+<ul>
+<li>Leverages relational databases or NoSQL databases to organize artefacts.</li>
+<li>Artefacts can be stored with metadata, making it easier to search and retrieve models, experiments, and results.</li>
+<li>Examples of such databases include PostgreSQL, MongoDB, or SQLite.</li>
+</ul>
+</li>
+<li>
+<p><strong>Version Control Systems</strong>:</p>
+<ul>
+<li>Tools like Git or DVC (Data Version Control) measure and track the versions of artefacts alongside code.</li>
+<li>Especially useful in collaborative environments where multiple data scientists are working on the same project.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cloud-native Artifact Stores</strong>:</p>
+<ul>
+<li>Services like MLflow and Weights &amp; Biases provide integrated solutions for storing and managing machine learning artefacts.</li>
+<li>Offer features such as experiment tracking, model registry, and visualization of training metrics.</li>
+</ul>
+</li>
+<li>
+<p><strong>On-premise Solutions</strong>:</p>
+<ul>
+<li>For organizations that maintain strict data governance, on-premise solutions could be preferred, utilizing local servers or network-attached storage for artefact storage.</li>
+</ul>
+</li>
+</ol>
+<p>Understanding the different kinds of artifact stores allows you to choose the right method for retrieving, storing, and managing artefacts effectively throughout the ML lifecycle.</p>
+<h2 id="adding-an-inference-step-to-the-pipeline">Adding an Inference Step to the Pipeline</h2>
+<p>We recently updated our pipeline to include an inference step, where the trained model is used to make predictions on the test dataset. Below is the updated definition of our training pipeline, along with the inference step:</p>
+<h3 id="1-pipeline-definition-pipelinestraining_pipelinepy">1. Pipeline Definition (<code>pipelines/training_pipeline.py</code>)</h3>
+<p>This code defines our updated pipeline, where we integrate the inference step.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> sys
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> zenml <span style="color:#f92672">import</span> pipeline
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Adding the parent directory to the module search path</span>
+</span></span><span style="display:flex;"><span>sys<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>append(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>abspath(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>dirname(__file__), <span style="color:#e6db74">&#39;..&#39;</span>)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> steps.load_data_step <span style="color:#f92672">import</span> load_data
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> steps.train_model_step <span style="color:#f92672">import</span> train_model
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> steps.evaluate_model_step <span style="color:#f92672">import</span> evaluate_model
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> steps.inference_step <span style="color:#f92672">import</span> inference_step
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@pipeline</span>(name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Tutorial&#34;</span>, enable_cache<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">training_pipeline</span>():
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Load data</span>
+</span></span><span style="display:flex;"><span>    X_train, X_test, y_train, y_test <span style="color:#f92672">=</span> load_data()
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Train the model</span>
+</span></span><span style="display:flex;"><span>    model <span style="color:#f92672">=</span> train_model(X_train, y_train)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Evaluate the model</span>
+</span></span><span style="display:flex;"><span>    evaluate_model(model, X_test, y_test)
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># Inference</span>
+</span></span><span style="display:flex;"><span>    predictions <span style="color:#f92672">=</span> inference_step(model, X_test)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> __name__ <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;__main__&#34;</span>:
+</span></span><span style="display:flex;"><span>    training_pipeline()
+</span></span></code></pre></div><h3 id="2-inference-step-stepsinference_steppy">2. Inference Step (<code>steps/inference_step.py</code>)</h3>
+<p>This code snippet shows how we define the inference step, which takes the trained model and makes predictions on the test dataset.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> zenml <span style="color:#f92672">import</span> step
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.ensemble <span style="color:#f92672">import</span> RandomForestClassifier
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> numpy <span style="color:#66d9ef">as</span> np
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@step</span>(enable_cache<span style="color:#f92672">=</span><span style="color:#66d9ef">False</span>)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">inference_step</span>(model: RandomForestClassifier, X_test: np<span style="color:#f92672">.</span>ndarray) <span style="color:#f92672">-&gt;</span> np<span style="color:#f92672">.</span>ndarray:
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;Inference on test dataset.&#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>    predictions <span style="color:#f92672">=</span> model<span style="color:#f92672">.</span>predict(X_test)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> predictions
+</span></span></code></pre></div><h2 id="loading-artefacts">Loading Artefacts</h2>
+<p>Once the inference step has been executed, it generates artefacts (i.e., the predictions). To work with these artefacts later on, we can use the following script to load them. Before to load them we need the id of the artifact.</p>
+<p><img alt="zenml_artifact_1.png" src="/zenml_artifact_1.png"></p>
+<p>The image shows the details of the artifact produced by the inference_step in a ZenML pipeline. The reference to the artifact is located at the top of the image:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>4f12d004-1a1f-453f-9321-a4da200345d4
+</span></span></code></pre></div><p>You can also find it at the bottom of the page in the code section. This reference is crucial for identifying and accessing the specific output generated by the inference_step. It uniquely identifies the artifact within the ZenML pipeline, allowing users to track and retrieve this data for further analysis or documentation.</p>
+<p>You can find further information about the artifact in the metadat section.</p>
+<p><img alt="zenml_artifact_2.png" src="/zenml_artifact_2.png"></p>
+<p>The image provides a detailed view of a ZenML pipeline with a focus on the output of the <code>inference_step</code>. This output is represented as a <code>DataArtifact</code> and includes various metadata that provide insights into the data produced during the inference process.</p>
+<h2 id="key-details-from-the-artifact-metadata">Key Details from the Artifact Metadata:</h2>
+<p>In our case we have:</p>
+<ul>
+<li>
+<p><strong>URI</strong>: <code>4f12d004-1a1f-453f-9321-a4da200345d4</code> — This unique identifier is associated with the output artifact from the <code>inference_step</code> in the ZenML pipeline. It helps track and reference this specific output within the workflow.</p>
+</li>
+<li>
+<p><strong>Data Type</strong>: The data is stored as a NumPy array with a data type of <code>&lt;class 'numpy.int64'&gt;</code>. This indicates that the predictions or inference results are integers.</p>
+</li>
+<li>
+<p><strong>Shape</strong>: The shape of the array is <code>30</code>, indicating that the output consists of 30 elements. This likely corresponds to the number of predictions made by the model during inference.</p>
+</li>
+<li>
+<p><strong>Statistical Information</strong>:</p>
+<ul>
+<li><strong>Min Value</strong>: The minimum value in the predictions is <code>0</code>.</li>
+<li><strong>Max Value</strong>: The maximum value in the predictions is <code>2</code>.</li>
+<li><strong>Mean</strong>: The average value of the predictions is <code>1.0333</code>, which suggests that the predicted classes are mostly around 1, with some variation.</li>
+<li><strong>Standard Deviation (std)</strong>: The standard deviation of <code>0.8359957469322967</code> provides insight into the dispersion of the predicted values around the mean.</li>
+</ul>
+</li>
+<li>
+<p><strong>Storage Size</strong>: The artifact occupies <code>8.02 KB</code> of storage, indicating that the data is relatively small, which is expected given the single-dimensional nature and small size of the dataset used in the inference.</p>
+</li>
+</ul>
+<p>This metadata offers valuable insights into the nature of the predictions made by the model, allowing for a quick assessment of the output characteristics without needing to inspect the raw data directly. This type of information is essential for verifying the model&rsquo;s performance and ensuring the predictions align with expectations.</p>
+<h3 id="load-artefact-script-load_artefactpy">Load Artefact Script (<code>load_artefact.py</code>)</h3>
+<p>This snippet demonstrates how to load a specific artefact from the ZenML client using its unique identifier.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">from</span> zenml.client <span style="color:#f92672">import</span> Client
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Replace with your artefact UUID</span>
+</span></span><span style="display:flex;"><span>artifact <span style="color:#f92672">=</span> Client()<span style="color:#f92672">.</span>get_artifact_version(<span style="color:#e6db74">&#39;4f12d004-1a1f-453f-9321-a4da200345d4&#39;</span>)
+</span></span><span style="display:flex;"><span>loaded_artifact <span style="color:#f92672">=</span> artifact<span style="color:#f92672">.</span>load()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(loaded_artifact)
+</span></span></code></pre></div><h3 id="explanation">Explanation:</h3>
+<ul>
+<li><strong>Client()</strong>: This initializes the ZenML client that allows interaction with your ZenML environment.</li>
+<li><strong>get_artifact_version()</strong>: We retrieve a specific version of the artefact using its unique identifier.</li>
+<li><strong>load()</strong>: This method loads the artefact into memory, allowing you to work with it directly.</li>
+</ul>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this tutorial, we learned about the significance of artefacts in ZenML pipelines, the various types of artifact stores, and how to integrate an inference step into an existing training pipeline. We also explained how to load these artefacts for further analysis or deployment.</p>
+<p>To give more context on the previous steps in the pipeline, feel free to check out the article <a href="https://jheiduk.com/posts/zenml_tutorial/">here</a>.</p>
+<p>With this knowledge, you should be well-equipped to utilize artefacts in your ZenML workflows effectively. Happy coding!</p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="//localhost:1313/posts/polars_pandas_data/"
+      ><span class="mr-1.5">←</span><span>Polars Introduction: Efficient Data Manipulation Compared to Pandas</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="//localhost:1313/posts/zenml_mlflow/"
+      ><span>ZenML Pipeline Tutorial Part 2: Adding MLflow to a ZenML Pipeline</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2026
+    <a class="link" href="//localhost:1313/">Julien Heiduk</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

@@ -1,0 +1,544 @@
+<!doctype html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<html
+  class="not-ready lg:text-base"
+  style="--bg: #fff"
+  lang="en"
+>
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, shrink-to-fit=no"
+  />
+
+  
+  <title>Cleora part 2: How to create user embeddings? - Julien Heiduk</title>
+
+  
+  <meta name="theme-color" />
+
+  
+  
+  
+  <meta name="description" content="This tutorial explores how to generate user embeddings from interaction data using Cleora, a high-performance graph embedding tool — ideal for recommendation systems and graph-based machine learning." />
+  <meta name="author" content="Julien Heiduk" />
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="preload stylesheet" as="style" href="//localhost:1313/main.min.css" />
+
+  
+
+  
+     
+  <link rel="preload" as="image" href="//localhost:1313/theme.svg" />
+
+  
+  
+  
+  <link rel="preload" as="image" href="https://www.gravatar.com/avatar/9d9b1fb5a77c392055d3adf9382ba7f5?s=160&amp;d=identicon" />
+  
+  
+
+  
+  <link rel="preload" as="image" href="//localhost:1313/github.svg" />
+  
+  <link rel="preload" as="image" href="//localhost:1313/linkedin.svg" />
+  
+  
+
+  
+  
+  <!DOCTYPE html>
+
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" integrity="sha384-GvrOXuhMATgEsSwCs4smul74iXGOixntILdUW9XmUC6+HX0sLNAK3q71HotJqlAn" crossorigin="anonymous">
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js" integrity="sha384-cpW21h6RZv/phavutF+AuVYrr+dA8xD9zs6FwLpaCct6O9ctzYFfFr4dgmgccOTx" crossorigin="anonymous"></script>
+
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4+/RRE05" crossorigin="anonymous"
+        onload="renderMathInElement(document.body);"></script>
+  </head>
+  ...
+</html>
+
+  
+  
+  
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          renderMathInElement(document.body, {
+              delimiters: [
+                  {left: "$$", right: "$$", display: true},
+                  {left: "$", right: "$", display: false}
+              ]
+          });
+      });
+  </script>
+  
+  <link rel="icon" href="//localhost:1313/favicon.ico" />
+  <link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png" />
+
+  
+  <meta name="generator" content="Hugo 0.128.0">
+
+  
+  
+
+  
+  
+</head>
+
+  <body class="text-black duration-200 ease-out dark:text-white">
+    <header class="mx-auto flex h-[4.5rem] max-w-3xl px-8 lg:justify-center">
+  <div class="relative z-50 mr-auto flex items-center">
+    <a
+      class="-translate-x-[1px] -translate-y-[1px] text-2xl font-semibold"
+      href="//localhost:1313/"
+      >Julien Heiduk</a
+    >
+    <div
+      class="btn-dark text-[0] ml-4 h-6 w-6 shrink-0 cursor-pointer [background:url(./theme.svg)_left_center/cover_no-repeat] dark:invert dark:[background-position:right]"
+      role="button"
+      aria-label="Dark"
+    ></div>
+  </div>
+
+  <div
+    class="btn-menu relative z-50 -mr-8 flex h-[4.5rem] w-[5rem] shrink-0 cursor-pointer flex-col items-center justify-center gap-2.5 lg:hidden"
+    role="button"
+    aria-label="Menu"
+  ></div>
+
+  
+  <script>
+    
+    const htmlClass = document.documentElement.classList;
+    setTimeout(() => {
+      htmlClass.remove('not-ready');
+    }, 10);
+
+    
+    const btnMenu = document.querySelector('.btn-menu');
+    btnMenu.addEventListener('click', () => {
+      htmlClass.toggle('open');
+    });
+
+    
+    const metaTheme = document.querySelector('meta[name="theme-color"]');
+    const lightBg = '#fff'.replace(/"/g, '');
+    const setDark = (isDark) => {
+      metaTheme.setAttribute('content', isDark ? '#000' : lightBg);
+      htmlClass[isDark ? 'add' : 'remove']('dark');
+      localStorage.setItem('dark', isDark);
+    };
+
+    
+    const darkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+    if (htmlClass.contains('dark')) {
+      setDark(true);
+    } else {
+      const darkVal = localStorage.getItem('dark');
+      setDark(darkVal ? darkVal === 'true' : darkScheme.matches);
+    }
+
+    
+    darkScheme.addEventListener('change', (event) => {
+      setDark(event.matches);
+    });
+
+    
+    const btnDark = document.querySelector('.btn-dark');
+    btnDark.addEventListener('click', () => {
+      setDark(localStorage.getItem('dark') !== 'true');
+    });
+  </script>
+
+  <div
+    class="nav-wrapper fixed inset-x-0 top-full z-40 flex h-full select-none flex-col justify-center pb-16 duration-200 dark:bg-black lg:static lg:h-auto lg:flex-row lg:!bg-transparent lg:pb-0 lg:transition-none"
+  >
+    
+    
+    <nav class="lg:ml-12 lg:flex lg:flex-row lg:items-center lg:space-x-6">
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://jheiduk.com/posts/introduction/"
+        >About</a
+      >
+      
+      <a
+        class="block text-center text-2xl leading-[5rem] lg:text-base lg:font-normal"
+        href="https://cours.campuz.fr/"
+        >Training</a
+      >
+      
+    </nav>
+    
+
+    
+    <nav
+      class="mt-12 flex justify-center space-x-10 dark:invert lg:ml-12 lg:mt-0 lg:items-center lg:space-x-6"
+    >
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./github.svg)"
+        href="https://github.com/JulienHeiduk"
+        target="_blank"
+        rel="me"
+      >
+        github
+      </a>
+      
+      <a
+        class="h-8 w-8 text-[0] [background:var(--url)_center_center/cover_no-repeat] lg:h-6 lg:w-6"
+        style="--url: url(./linkedin.svg)"
+        href="https://linkedin.com/in/julien-heiduk"
+        target="_blank"
+        rel="me"
+      >
+        linkedin
+      </a>
+      
+    </nav>
+    
+  </div>
+</header>
+
+
+    <main
+      class="prose prose-neutral relative mx-auto min-h-[calc(100%-9rem)] max-w-3xl px-8 pb-16 pt-12 dark:prose-invert"
+    >
+      
+
+<article>
+  <header class="mb-16">
+    <h1 class="!my-0 pb-2.5">Cleora part 2: How to create user embeddings?</h1>
+
+    
+    <div class="text-sm antialiased opacity-60">
+      
+      <time>Apr 17, 2025</time>
+      
+      
+      
+      
+    </div>
+    
+  </header>
+
+  <section><h1 id="building-user-embeddings-with-movielens-100k-and-cleora">Building User Embeddings with MovieLens 100k and Cleora</h1>
+<p>In this tutorial, we will demonstrate how to generate user embeddings using the MovieLens 100k dataset and Cleora, a fast and scalable embedding generation tool. The process involves collecting the dataset, preparing it for training, generating movie embeddings, and then aggregating these embeddings to create user embeddings.</p>
+<h2 id="table-of-contents">Table of Contents</h2>
+<ol>
+<li><a href="/posts/cleora_user_embeddings/#1-collect-the-data--movielens-100k-get_data-collectpy">Collect the Data – MovieLens 100k</a></li>
+<li><a href="/posts/cleora_user_embeddings/#2-prepare-the-data-for-training--clique-expansion-preprocessing-preprocessingpy">Prepare the Data for Training – Clique Expansion</a></li>
+<li><a href="/posts/cleora_user_embeddings/#3-train-cleora-to-generate-movie-embeddings-embeddings-trainingpy">Train Cleora to Generate Movie Embeddings</a></li>
+<li><a href="/posts/cleora_user_embeddings/#4-create-user-embeddings-from-movie-embeddings-embeddings-user_embeddingspy">Create User Embeddings from Movie Embeddings</a></li>
+</ol>
+<hr>
+<h2 id="1-collect-the-data--movielens-100k-get_datacollectpy">1. Collect the Data – MovieLens 100k (<code>get_data/collect.py</code>)</h2>
+<p>First, we will download the MovieLens 100k dataset and Cleora. The dataset contains user ratings for various movies, making it suitable for building recommender systems.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> subprocess
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Define the path to save the dataset</span>
+</span></span><span style="display:flex;"><span>PATH <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;../get_data/&#34;</span>
+</span></span><span style="display:flex;"><span>os<span style="color:#f92672">.</span>makedirs(PATH, exist_ok<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Download the MovieLens 100k dataset</span>
+</span></span><span style="display:flex;"><span>subprocess<span style="color:#f92672">.</span>run([<span style="color:#e6db74">&#34;wget&#34;</span>, <span style="color:#e6db74">&#34;https://files.grouplens.org/datasets/movielens/ml-100k.zip&#34;</span>, <span style="color:#e6db74">&#34;-P&#34;</span>, PATH], check<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>subprocess<span style="color:#f92672">.</span>run([<span style="color:#e6db74">&#34;unzip&#34;</span>, <span style="color:#e6db74">&#34;-d&#34;</span>, PATH, <span style="color:#e6db74">&#34;-o&#34;</span>, <span style="color:#e6db74">&#34;-q&#34;</span>, os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(PATH, <span style="color:#e6db74">&#34;ml-100k.zip&#34;</span>)], check<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Download Cleora</span>
+</span></span><span style="display:flex;"><span>subprocess<span style="color:#f92672">.</span>run([<span style="color:#e6db74">&#34;wget&#34;</span>, <span style="color:#e6db74">&#34;https://github.com/Synerise/cleora/releases/download/v1.1.1/cleora-v1.1.1-x86_64-unknown-linux-gnu&#34;</span>, <span style="color:#e6db74">&#34;-P&#34;</span>, PATH], check<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span></code></pre></div><h3 id="explanation">Explanation</h3>
+<ol>
+<li><strong>Directory Creation</strong>: We create a directory to store the dataset and Cleora binaries. This ensures that all necessary files are organized and accessible for later stages.</li>
+<li><strong>Dataset Download</strong>: The MovieLens dataset is downloaded and unzipped. This dataset is widely used for recommendation systems and provides a rich set of user-movie interactions.</li>
+<li><strong>Cleora Download</strong>: Cleora is downloaded for use in embedding generation. Cleora is known for its speed and scalability, which is crucial when handling large-scale graph data.</li>
+</ol>
+<h3 id="alternatives-and-suggestions">Alternatives and Suggestions</h3>
+<ul>
+<li><strong>Other Graph Embedding Libraries</strong>: Consider alternatives like Node2Vec, which focuses on node embeddings in graphs, or PyTorch Geometric, which offers a more extensive suite for deep learning on graphs.</li>
+<li><strong>Use Cases</strong>: Cleora is particularly strong in scenarios where speed and scalability are critical, such as real-time recommendation systems or large-scale graph analysis. It might be less suited for tasks that require deep learning-based embeddings or highly flexible architectures.</li>
+</ul>
+<hr>
+<h2 id="2-prepare-the-data-for-training--clique-expansion-preprocessingpreprocessingpy">2. Prepare the Data for Training – Clique Expansion (<code>preprocessing/preprocessing.py</code>)</h2>
+<p>Next, we will preprocess the dataset to create a graph representation that Cleora can use for generating embeddings.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> pathlib <span style="color:#f92672">import</span> Path
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> sklearn.model_selection <span style="color:#f92672">import</span> train_test_split
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Configuration parameters</span>
+</span></span><span style="display:flex;"><span>config <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;cleora_n_iter&#39;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;cleora_dim&#39;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;train_test_split&#39;</span>: <span style="color:#ae81ff">0.2</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>PATH <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;../get_data/&#34;</span>
+</span></span><span style="display:flex;"><span>ml_path <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(PATH, <span style="color:#e6db74">&#34;ml-100k&#34;</span>, <span style="color:#e6db74">&#34;u.data&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load the dataset</span>
+</span></span><span style="display:flex;"><span>df <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(ml_path, sep<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">&#34;</span>, names<span style="color:#f92672">=</span>[<span style="color:#e6db74">&#34;user&#34;</span>, <span style="color:#e6db74">&#34;movie&#34;</span>, <span style="color:#e6db74">&#34;rating&#34;</span>, <span style="color:#e6db74">&#34;timestamp&#34;</span>])
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Prepare user-movie interactions</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(PATH, <span style="color:#e6db74">&#34;user_movie.txt&#34;</span>), <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> row <span style="color:#f92672">in</span> df<span style="color:#f92672">.</span>itertuples():
+</span></span><span style="display:flex;"><span>        f<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;user_</span><span style="color:#e6db74">{</span>row<span style="color:#f92672">.</span>user<span style="color:#e6db74">}</span><span style="color:#e6db74"> movie_</span><span style="color:#e6db74">{</span>row<span style="color:#f92672">.</span>movie<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># File paths for Cleora input</span>
+</span></span><span style="display:flex;"><span>movie_cleora_input_clique_filename <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(PATH, <span style="color:#e6db74">&#34;ml-100k&#34;</span>, <span style="color:#e6db74">&#34;ml_clique.txt&#34;</span>)
+</span></span><span style="display:flex;"><span>movie_lp_train_filename <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(PATH, <span style="color:#e6db74">&#34;ml-100k&#34;</span>, <span style="color:#e6db74">&#34;ml_train.txt&#34;</span>)
+</span></span><span style="display:flex;"><span>movie_lp_test_filename <span style="color:#f92672">=</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(PATH, <span style="color:#e6db74">&#34;ml-100k&#34;</span>, <span style="color:#e6db74">&#34;ml_test.txt&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create training and testing datasets</span>
+</span></span><span style="display:flex;"><span>df[<span style="color:#e6db74">&#39;user_id&#39;</span>] <span style="color:#f92672">=</span> df[<span style="color:#e6db74">&#39;user&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;user_</span><span style="color:#e6db74">{</span>x<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>df[<span style="color:#e6db74">&#39;movie_id&#39;</span>] <span style="color:#f92672">=</span> df[<span style="color:#e6db74">&#39;movie&#39;</span>]<span style="color:#f92672">.</span>apply(<span style="color:#66d9ef">lambda</span> x: <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;movie_</span><span style="color:#e6db74">{</span>x<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>train, test <span style="color:#f92672">=</span> train_test_split(df[[<span style="color:#e6db74">&#34;user_id&#34;</span>, <span style="color:#e6db74">&#34;movie_id&#34;</span>]], test_size<span style="color:#f92672">=</span>config[<span style="color:#e6db74">&#39;train_test_split&#39;</span>], random_state<span style="color:#f92672">=</span><span style="color:#ae81ff">42</span>)
+</span></span><span style="display:flex;"><span>train<span style="color:#f92672">.</span>columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;id_1&#34;</span>, <span style="color:#e6db74">&#34;id_2&#34;</span>]
+</span></span><span style="display:flex;"><span>test<span style="color:#f92672">.</span>columns <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;id_1&#34;</span>, <span style="color:#e6db74">&#34;id_2&#34;</span>]
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>grouped_train <span style="color:#f92672">=</span> train<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#34;id_1&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(movie_cleora_input_clique_filename, <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#66d9ef">as</span> f_cleora_clique, \
+</span></span><span style="display:flex;"><span>     open(movie_lp_train_filename, <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#66d9ef">as</span> f_train:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _, group <span style="color:#f92672">in</span> grouped_train:
+</span></span><span style="display:flex;"><span>        movie_ids <span style="color:#f92672">=</span> group[<span style="color:#e6db74">&#34;id_2&#34;</span>]<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>        f_cleora_clique<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span><span style="color:#e6db74">&#39; &#39;</span><span style="color:#f92672">.</span>join(movie_ids)<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> i <span style="color:#f92672">in</span> range(len(movie_ids)):
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> j <span style="color:#f92672">in</span> range(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, len(movie_ids)):
+</span></span><span style="display:flex;"><span>                f_train<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>movie_ids[i]<span style="color:#e6db74">}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{</span>movie_ids[j]<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Write test file</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(movie_lp_test_filename, <span style="color:#e6db74">&#34;w&#34;</span>) <span style="color:#66d9ef">as</span> f_test:
+</span></span><span style="display:flex;"><span>    grouped_test <span style="color:#f92672">=</span> test<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#34;id_1&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> user, group <span style="color:#f92672">in</span> grouped_test:
+</span></span><span style="display:flex;"><span>        movie_ids <span style="color:#f92672">=</span> group[<span style="color:#e6db74">&#34;id_2&#34;</span>]<span style="color:#f92672">.</span>tolist()
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> movie_id <span style="color:#f92672">in</span> movie_ids:
+</span></span><span style="display:flex;"><span>            f_test<span style="color:#f92672">.</span>write(<span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;</span><span style="color:#e6db74">{</span>user<span style="color:#e6db74">}</span><span style="color:#ae81ff">\t</span><span style="color:#e6db74">{</span>movie_id<span style="color:#e6db74">}</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>)
+</span></span></code></pre></div><h3 id="explanation-1">Explanation</h3>
+<ol>
+<li><strong>Data Loading</strong>: Load the MovieLens dataset into a DataFrame. This structured format allows for efficient data manipulation and analysis.</li>
+<li><strong>User-Movie Interaction</strong>: Create a user-movie interaction file to represent each user&rsquo;s interactions with movies, which is essential for graph-based embedding generation.</li>
+<li><strong>Clique Expansion</strong>: Format the data as cliques for Cleora input, creating both training and testing files from the user-movie interactions. This process involves creating a fully connected subgraph of movies for each user, which Cleora will use to learn embeddings. You can learn more about clique expansion <a href="https://jheiduk.com/posts/cleora_graph_embeddings/">here</a>.</li>
+</ol>
+<h3 id="alternatives-and-suggestions-1">Alternatives and Suggestions</h3>
+<ul>
+<li><strong>Alternative Aggregation Strategies</strong>: Consider different strategies for aggregating movie embeddings into user embeddings, such as using a weighted mean based on ratings or applying more complex neural network-based aggregators.</li>
+<li><strong>Graph Representation</strong>: Explore other graph representations that might capture different aspects of the data, such as bipartite graphs or hypergraphs.</li>
+</ul>
+<hr>
+<h2 id="3-train-cleora-to-generate-movie-embeddings-embeddingstrainingpy">3. Train Cleora to Generate Movie Embeddings (<code>embeddings/training.py</code>)</h2>
+<p>Now we will utilize Cleora to compute embeddings for movies based on the graph representation we created.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> subprocess
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> os
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Configuration parameters</span>
+</span></span><span style="display:flex;"><span>config <span style="color:#f92672">=</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;cleora_n_iter&#39;</span>: <span style="color:#ae81ff">5</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#39;cleora_dim&#39;</span>: <span style="color:#ae81ff">1024</span>,
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Function to generate output filename based on columns</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">columns2output_filename</span>(output_dir, columns):
+</span></span><span style="display:flex;"><span>    columns_split <span style="color:#f92672">=</span> columns<span style="color:#f92672">.</span>split()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(output_dir, <span style="color:#e6db74">f</span><span style="color:#e6db74">&#39;emb__</span><span style="color:#e6db74">{</span><span style="color:#e6db74">&#34;__&#34;</span><span style="color:#f92672">.</span>join(columns_split)<span style="color:#e6db74">}</span><span style="color:#e6db74">.out&#39;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">train_cleora</span>(dim, n_iter, columns, input_filename, output_dir):
+</span></span><span style="display:flex;"><span>    command <span style="color:#f92672">=</span> [os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;../get_data/&#34;</span>, <span style="color:#e6db74">&#39;cleora-v1.1.1-x86_64-unknown-linux-gnu&#39;</span>),
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;--columns&#39;</span>, columns,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;--dimension&#39;</span>, str(dim),
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;-n&#39;</span>, str(n_iter),
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;--input&#39;</span>, input_filename,
+</span></span><span style="display:flex;"><span>                <span style="color:#e6db74">&#39;-o&#39;</span>, output_dir]
+</span></span><span style="display:flex;"><span>    subprocess<span style="color:#f92672">.</span>run(command, check<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> columns2output_filename(output_dir, columns)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Run Cleora with the specified parameters</span>
+</span></span><span style="display:flex;"><span>subprocess<span style="color:#f92672">.</span>run([<span style="color:#e6db74">&#39;chmod&#39;</span>, <span style="color:#e6db74">&#39;+x&#39;</span>, os<span style="color:#f92672">.</span>path<span style="color:#f92672">.</span>join(<span style="color:#e6db74">&#34;../get_data/&#34;</span>, <span style="color:#e6db74">&#39;cleora-v1.1.1-x86_64-unknown-linux-gnu&#39;</span>)], check<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>cleora_output_clique_filename <span style="color:#f92672">=</span> train_cleora(config[<span style="color:#e6db74">&#39;cleora_dim&#39;</span>], config[<span style="color:#e6db74">&#39;cleora_n_iter&#39;</span>], 
+</span></span><span style="display:flex;"><span>                                             <span style="color:#e6db74">&#34;complex::reflexive::movie_id&#34;</span>, 
+</span></span><span style="display:flex;"><span>                                             <span style="color:#e6db74">&#34;../get_data/ml-100k/ml_clique.txt&#34;</span>, 
+</span></span><span style="display:flex;"><span>                                             <span style="color:#e6db74">&#34;../output&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Display a sample of the embeddings</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(<span style="color:#e6db74">&#34;../output/emb__movie_id__movie_id.out&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> _ <span style="color:#f92672">in</span> range(<span style="color:#ae81ff">2</span>):
+</span></span><span style="display:flex;"><span>        print(f<span style="color:#f92672">.</span>readline())
+</span></span></code></pre></div><h3 id="explanation-2">Explanation</h3>
+<ol>
+<li><strong>Embedding Generation</strong>: Cleora is executed to generate embeddings using the clique input file. The process involves Cleora iterating through the graph to learn vector representations for each node (movie).</li>
+<li><strong>Output Handling</strong>: The output is saved in a specified directory, and we print a few lines of the resulting embeddings for inspection. This step ensures that the embeddings have been correctly generated and can be used for downstream tasks.</li>
+</ol>
+<h3 id="alternatives-and-suggestions-2">Alternatives and Suggestions</h3>
+<ul>
+<li><strong>Embedding Parameters</strong>: Experiment with different dimensions and iteration counts to see how they affect the quality of the embeddings.</li>
+<li><strong>Interpretation</strong>: Consider visualizing embeddings using techniques like t-SNE or PCA to understand their structure and relationships.</li>
+</ul>
+<hr>
+<h2 id="4-create-user-embeddings-from-movie-embeddings-embeddingsuser_embeddingspy">4. Create User Embeddings from Movie Embeddings (<code>embeddings/user_embeddings.py</code>)</h2>
+<p>Finally, we will create user embeddings by aggregating the movie embeddings associated with each user.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-python" data-lang="python"><span style="display:flex;"><span><span style="color:#f92672">import</span> pandas <span style="color:#66d9ef">as</span> pd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load movie embeddings</span>
+</span></span><span style="display:flex;"><span>filepath <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;../output/emb__movie_id__movie_id.out&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">with</span> open(filepath, <span style="color:#e6db74">&#34;r&#34;</span>) <span style="color:#66d9ef">as</span> f:
+</span></span><span style="display:flex;"><span>    lines <span style="color:#f92672">=</span> f<span style="color:#f92672">.</span>readlines()[<span style="color:#ae81ff">1</span>:]  <span style="color:#75715e"># Skip the first line</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Parse embeddings</span>
+</span></span><span style="display:flex;"><span>data <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span>index <span style="color:#f92672">=</span> []
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> line <span style="color:#f92672">in</span> lines:
+</span></span><span style="display:flex;"><span>    parts <span style="color:#f92672">=</span> line<span style="color:#f92672">.</span>strip()<span style="color:#f92672">.</span>split()
+</span></span><span style="display:flex;"><span>    movie_id <span style="color:#f92672">=</span> parts[<span style="color:#ae81ff">0</span>]
+</span></span><span style="display:flex;"><span>    embedding <span style="color:#f92672">=</span> list(map(float, parts[<span style="color:#ae81ff">2</span>:]))  <span style="color:#75715e"># Ignore the integer in second position</span>
+</span></span><span style="display:flex;"><span>    index<span style="color:#f92672">.</span>append(movie_id)
+</span></span><span style="display:flex;"><span>    data<span style="color:#f92672">.</span>append(embedding)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create a DataFrame for movie embeddings</span>
+</span></span><span style="display:flex;"><span>movie_emb <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>DataFrame(data, index<span style="color:#f92672">=</span>index)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Load training data</span>
+</span></span><span style="display:flex;"><span>train <span style="color:#f92672">=</span> pd<span style="color:#f92672">.</span>read_csv(<span style="color:#e6db74">&#34;../get_data/ml-100k/ml_train.csv&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ensure all movies in train are present in embeddings</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> len(train[<span style="color:#e6db74">&#39;id_2&#39;</span>]<span style="color:#f92672">.</span>unique()) <span style="color:#f92672">==</span> movie_emb<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>], \
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">f</span><span style="color:#e6db74">&#34;Train movies: </span><span style="color:#e6db74">{</span>len(train[<span style="color:#e6db74">&#39;id_2&#39;</span>]<span style="color:#f92672">.</span>unique())<span style="color:#e6db74">}</span><span style="color:#e6db74">, embeddings: </span><span style="color:#e6db74">{</span>movie_emb<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>]<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Create user embeddings by averaging movie embeddings</span>
+</span></span><span style="display:flex;"><span>train_with_emb <span style="color:#f92672">=</span> train<span style="color:#f92672">.</span>join(movie_emb, on<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;id_2&#34;</span>)
+</span></span><span style="display:flex;"><span>user_emb <span style="color:#f92672">=</span> train_with_emb<span style="color:#f92672">.</span>groupby(<span style="color:#e6db74">&#34;id_1&#34;</span>)<span style="color:#f92672">.</span>mean(numeric_only<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>user_emb <span style="color:#f92672">=</span> user_emb<span style="color:#f92672">.</span>astype(<span style="color:#e6db74">&#34;float32&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>print(user_emb)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">assert</span> user_emb<span style="color:#f92672">.</span>shape[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> len(train[<span style="color:#e6db74">&#39;id_1&#39;</span>]<span style="color:#f92672">.</span>unique())
+</span></span></code></pre></div><h3 id="explanation-3">Explanation</h3>
+<ol>
+<li><strong>Embedding Loading</strong>: Load the generated movie embeddings into a DataFrame. This step is crucial for mapping user interactions to their respective embeddings.</li>
+<li><strong>Data Integrity Check</strong>: Ensure all movies in the training dataset have corresponding embeddings. This check prevents any loss of data integrity that could affect user embedding generation.</li>
+<li><strong>User Embedding Creation</strong>: Aggregate movie embeddings for each user by computing the mean, which creates a vector representation of a user based on their movie interactions.</li>
+</ol>
+<h3 id="alternatives-and-suggestions-3">Alternatives and Suggestions</h3>
+<ul>
+<li><strong>Advanced Aggregation Methods</strong>: Explore other aggregation methods like attention mechanisms or neural network-based approaches to capture more complex user preferences.</li>
+<li><strong>Use Cases</strong>: User embeddings can be used for personalized recommendations, user similarity analysis, and clustering users based on preferences.</li>
+</ul>
+<hr>
+<h2 id="conclusion">Conclusion</h2>
+<p>In this tutorial, we walked through the entire pipeline of generating user embeddings using the MovieLens 100k dataset and Cleora. By following these steps, you can replicate the process and explore further enhancements or applications of user embeddings in your projects. In the next articles we are going to see how to user embeddings to create a recommender systems with unsupervised approach and with a supervised approach.</p>
+</section>
+
+  
+  
+
+  
+  
+  
+  
+  <nav class="mt-24 flex rounded-lg bg-black/[3%] text-lg dark:bg-white/[8%]">
+    
+    <a
+      class="flex w-1/2 items-center rounded-l-md p-6 pr-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="//localhost:1313/posts/mcp/"
+      ><span class="mr-1.5">←</span><span>Model Context Protocol server with FastMCP</span></a
+    >
+    
+    
+    <a
+      class="ml-auto flex w-1/2 items-center justify-end rounded-r-md p-6 pl-3 font-semibold no-underline hover:bg-black/[2%] dark:hover:bg-white/[3%]"
+      href="//localhost:1313/posts/cleora_graph_embeddings/"
+      ><span>Cleora part 1: Graph Embeddings</span><span class="ml-1.5">→</span></a
+    >
+    
+  </nav>
+  
+  
+
+  
+  
+
+  
+  
+</article>
+
+
+    </main>
+
+    <footer
+  class="opaco mx-auto flex h-[4.5rem] max-w-3xl items-center px-8 text-[0.9em] opacity-60"
+>
+  <div class="mr-auto">
+    &copy; 2026
+    <a class="link" href="//localhost:1313/">Julien Heiduk</a>
+  </div>
+  <a class="link mx-6" href="https://gohugo.io/" rel="noopener" target="_blank"
+    >Powered by Hugo️️</a
+  >️
+  <a
+    class="link"
+    href="https://github.com/nanxiaobei/hugo-paper"
+    rel="noopener"
+    target="_blank"
+    >✎ Paper</a
+  >
+</footer>
+
+  </body>
+</html>

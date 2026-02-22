@@ -1,10 +1,110 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Terminal</title>
-    <link>/</link>
-    <description>Recent content on Terminal</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language><atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+    <title>Julien Heiduk</title>
+    <link>//localhost:1313/</link>
+    <description>Recent content on Julien Heiduk</description>
+    <generator>Hugo</generator>
+    <language>en</language>
+    <lastBuildDate>Sun, 22 Feb 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>GCN with PyTorch for Co-Purchase Recommendation</title>
+      <link>//localhost:1313/posts/gcn-pytorch-recommendation/</link>
+      <pubDate>Sun, 22 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/gcn-pytorch-recommendation/</guid>
+      <description>Graph Convolutional Networks turn co-purchase data into a graph and learn item embeddings for recommendation. A full PyTorch Geometric implementation included.</description>
+    </item>
+    <item>
+      <title>Retrieval-Augmented Generation with LangChain</title>
+      <link>//localhost:1313/posts/rag-langchain/</link>
+      <pubDate>Sun, 22 Feb 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/rag-langchain/</guid>
+      <description>RAG grounds LLM answers in your own documents. Learn how to build a production-ready RAG pipeline with LangChain, FAISS, and OpenAI in Python.</description>
+    </item>
+    <item>
+      <title>Model Context Protocol server with FastMCP</title>
+      <link>//localhost:1313/posts/mcp/</link>
+      <pubDate>Mon, 12 May 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/mcp/</guid>
+      <description>This tutorial explores how to create a MCP server with FastMCP and why use it.</description>
+    </item>
+    <item>
+      <title>Cleora part 2: How to create user embeddings?</title>
+      <link>//localhost:1313/posts/cleora_user_embeddings/</link>
+      <pubDate>Thu, 17 Apr 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/cleora_user_embeddings/</guid>
+      <description>This tutorial explores how to generate user embeddings from interaction data using Cleora, a high-performance graph embedding tool — ideal for recommendation systems and graph-based machine learning.</description>
+    </item>
+    <item>
+      <title>Cleora part 1: Graph Embeddings</title>
+      <link>//localhost:1313/posts/cleora_graph_embeddings/</link>
+      <pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/cleora_graph_embeddings/</guid>
+      <description>In the realm of data science, understanding relationships among entities is critical. Cleora shines in this context by efficiently modeling relationships</description>
+    </item>
+    <item>
+      <title>Similar and complementary candidates generator</title>
+      <link>//localhost:1313/posts/similarity_complementarity/</link>
+      <pubDate>Wed, 27 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/similarity_complementarity/</guid>
+      <description>In this tutorial, we&amp;rsquo;ll explore how to leverage Word2Vec to find words that are similar or complementary. We&amp;rsquo;ll discuss two specific approaches - the IN-OUT approach and the OUT-OUT approach - both of which are useful for various applications, including recommender systems.</description>
+    </item>
+    <item>
+      <title>Polars Introduction: Efficient Data Manipulation Compared to Pandas</title>
+      <link>//localhost:1313/posts/polars_pandas_data/</link>
+      <pubDate>Wed, 04 Sep 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/polars_pandas_data/</guid>
+      <description>Polars offers a faster and more memory-efficient alternative to Pandas for data manipulation tasks, particularly with large datasets, due to its use of parallel processing, lazy evaluation, and Arrow memory format, making it an ideal tool for data engineers and scientists seeking enhanced performance.</description>
+    </item>
+    <item>
+      <title>ZenML Pipeline Tutorial Part 3: Understanding Artefacts and Adding Inference Steps</title>
+      <link>//localhost:1313/posts/zenml_artifacts/</link>
+      <pubDate>Thu, 29 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/zenml_artifacts/</guid>
+      <description>In this tutorial, we will dive deep into the concept of artefacts in ZenML pipelines. We’ll explain how to define and use them, with a focus on the newly added inference step in an existing pipeline&amp;hellip;</description>
+    </item>
+    <item>
+      <title>ZenML Pipeline Tutorial Part 2: Adding MLflow to a ZenML Pipeline</title>
+      <link>//localhost:1313/posts/zenml_mlflow/</link>
+      <pubDate>Fri, 16 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/zenml_mlflow/</guid>
+      <description>In this tutorial, we will integrate MLflow into a ZenML pipeline for tracking machine learning experiments. MLflow is an open-source platform to manage the ML lifecycle, including experimentation, reproducibility, and deployment&amp;hellip;</description>
+    </item>
+    <item>
+      <title>ZenML Pipeline Tutorial Part 1: How to Use ZenML for Building a Machine Learning Pipeline</title>
+      <link>//localhost:1313/posts/zenml_tutorial/</link>
+      <pubDate>Thu, 15 Aug 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/zenml_tutorial/</guid>
+      <description>In this tutorial, we will explore how to use ZenML to build a machine learning pipeline that performs data loading, model training, and evaluation&amp;hellip;</description>
+    </item>
+    <item>
+      <title>Manage Product Compatibility with Machine Learning</title>
+      <link>//localhost:1313/posts/product_compatibility/</link>
+      <pubDate>Thu, 23 May 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/product_compatibility/</guid>
+      <description>The paper Adaptive Multi-view Rule Discovery for Weakly-Supervised Compatible Products Prediction by Rongzhi Zhang, Rebecca West, Xiquan Cui, and Chao Zhang presents an innovative method&amp;hellip;</description>
+    </item>
+    <item>
+      <title>Complementary Candidate Generator with Word2Vec</title>
+      <link>//localhost:1313/posts/complementary_candidates_word2vec/</link>
+      <pubDate>Mon, 15 Jan 2024 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/complementary_candidates_word2vec/</guid>
+      <description>Candidates generation is the first step in a Multi-Stage recommendation system.</description>
+    </item>
+    <item>
+      <title>Product Recommendation in Retail</title>
+      <link>//localhost:1313/posts/ranking_siamese_nn/</link>
+      <pubDate>Mon, 11 Sep 2023 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/ranking_siamese_nn/</guid>
+      <description>In this first article, we will study the method proposed by Home Depot to recommend products on each product page. The recommender system proposed in this research paper is characterized a Item-to-Item&amp;hellip;</description>
+    </item>
+    <item>
+      <title>Introduction</title>
+      <link>//localhost:1313/posts/introduction/</link>
+      <pubDate>Tue, 01 Aug 2023 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/introduction/</guid>
+      <description>Welcome to the exciting world of Data Science, where data is our language and artificial intelligence is our primary tool to decipher that language. I am thrilled that you are here&amp;hellip;</description>
+    </item>
   </channel>
 </rss>
