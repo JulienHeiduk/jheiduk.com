@@ -82,10 +82,7 @@ model = GCNEncoder(in_channels=N_ITEMS, hidden=64, out_channels=32)
 
 ## 4. Training with Link Prediction
 
-The task is **link prediction**: the model should score real co-purchase pairs higher than random pairs. For each training step, `negative_sampling` draws item pairs that share no edge. The objective is binary cross-entropy on dot-product scores:
-
-$$\mathcal{L} = -\sum_{(i,j)\in\mathcal{E}}\log\sigma(\mathbf{z}_i^{\top} \mathbf{z}_j) - \sum_{(i,j)\notin\mathcal{E}}\log\left(1 - \sigma(\mathbf{z}_i^{\top} \mathbf{z}_j)\right)$$
-
+The task is **link prediction**: the model should score real co-purchase pairs higher than random pairs. For each training step, `negative_sampling` draws item pairs that share no edge. The objective is binary cross-entropy on dot-product scores.
 ```python
 from torch_geometric.utils import negative_sampling
 
