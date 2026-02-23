@@ -47,7 +47,7 @@ summaryLength = 70
   [[menu.main]]
     identifier = "rag"
     name = "RAG Demo"
-    url = "https://jheiduk-rag.streamlit.app/"
+    url = "https://jheiduk-rag-demo.streamlit.app/"
     parent = "applications"
     weight = 1
 
