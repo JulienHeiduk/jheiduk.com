@@ -36,7 +36,20 @@ summaryLength = 70
     identifier = "about"
     name = "About"
     url = "https://jheiduk.com/posts/introduction/"
-    weight = 10    
+    weight = 10
+
+  [[menu.main]]
+    identifier = "applications"
+    name = "Applications"
+    url = "#"
+    weight = 20
+
+  [[menu.main]]
+    identifier = "rag"
+    name = "RAG Demo"
+    url = "https://jheiduk.streamlit.app"
+    parent = "applications"
+    weight = 1
 
 [languages]
   [languages.en]
