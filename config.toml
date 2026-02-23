@@ -54,7 +54,7 @@ summaryLength = 70
   [[menu.main]]
     identifier = "gnn"
     name = "GNN Explorer"
-    url = "https://jheiduk-gnn.streamlit.app/"
+    url = "https://jheiduk-gnn-explorer.streamlit.app/"
     parent = "applications"
     weight = 2
 
