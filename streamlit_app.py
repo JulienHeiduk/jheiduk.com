@@ -2,18 +2,19 @@ import os
 import tempfile
 
 import streamlit as st
-from langchain.chains import RetrievalQA
+import torch
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import PyPDFLoader, TextLoader
 from langchain_community.embeddings import HuggingFaceEmbeddings
-from langchain_community.llms import HuggingFacePipeline
 from langchain_community.vectorstores import FAISS
-from transformers import pipeline as hf_pipeline
+from transformers import AutoModelForSeq2SeqLM, AutoTokenizer
 
 st.set_page_config(page_title="RAG Demo", page_icon="🔍", layout="wide")
 
 st.title("🔍 RAG Demo")
 st.caption("Upload a document and ask questions — runs fully on-device, no API key needed.")
+
+MODEL_NAME = "google/flan-t5-small"
 
 
 # ── Model loading (cached across sessions) ────────────────────────────────────
@@ -23,18 +24,13 @@ def load_models():
         model_name="sentence-transformers/all-MiniLM-L6-v2",
         model_kwargs={"device": "cpu"},
     )
-    pipe = hf_pipeline(
-        "text2text-generation",
-        model="google/flan-t5-small",
-        max_new_tokens=256,
-        do_sample=False,
-        device="cpu",
-    )
-    llm = HuggingFacePipeline(pipeline=pipe)
-    return embeddings, llm
+    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    model = AutoModelForSeq2SeqLM.from_pretrained(MODEL_NAME)
+    model.eval()
+    return embeddings, tokenizer, model
 
 
-embeddings, llm = load_models()
+embeddings, tokenizer, gen_model = load_models()
 
 
 # ── Sidebar ───────────────────────────────────────────────────────────────────
@@ -65,6 +61,26 @@ def build_index(file_bytes: bytes, filename: str, chunk_size: int, chunk_overlap
     return vectorstore, len(chunks)
 
 
+# ── Answer generation ─────────────────────────────────────────────────────────
+def generate_answer(query: str, vectorstore, top_k: int):
+    docs = vectorstore.similarity_search(query, k=top_k)
+    context = "\n\n".join(doc.page_content for doc in docs)
+
+    prompt = (
+        "Answer the question using only the context below. "
+        "If the answer is not in the context, say 'I don't know'.\n\n"
+        f"Context:\n{context}\n\n"
+        f"Question: {query}\n\n"
+        "Answer:"
+    )
+
+    inputs = tokenizer(prompt, return_tensors="pt", max_length=512, truncation=True)
+    with torch.no_grad():
+        outputs = gen_model.generate(**inputs, max_new_tokens=256, do_sample=False)
+
+    return tokenizer.decode(outputs[0], skip_special_tokens=True), docs
+
+
 # ── Upload ────────────────────────────────────────────────────────────────────
 uploaded = st.file_uploader("Upload a PDF or TXT file", type=["pdf", "txt"])
 
@@ -72,7 +88,6 @@ if not uploaded:
     st.info("Upload a document to begin.")
     st.stop()
 
-# Re-index only when file or settings change
 file_key = (uploaded.name, uploaded.size, chunk_size, chunk_overlap)
 if st.session_state.get("file_key") != file_key:
     with st.spinner("Indexing document…"):
@@ -102,19 +117,9 @@ if query:
     with st.chat_message("user"):
         st.markdown(query)
 
-    retriever = st.session_state.vectorstore.as_retriever(search_kwargs={"k": top_k})
-    qa_chain = RetrievalQA.from_chain_type(
-        llm=llm,
-        retriever=retriever,
-        return_source_documents=True,
-    )
-
     with st.chat_message("assistant"):
         with st.spinner("Thinking…"):
-            result = qa_chain.invoke({"query": query})
-
-        answer = result["answer"]
-        sources = result["source_documents"]
+            answer, sources = generate_answer(query, st.session_state.vectorstore, top_k)
 
         st.markdown(answer)
 
