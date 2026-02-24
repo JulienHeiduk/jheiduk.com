@@ -128,9 +128,9 @@ trainer.model.save_pretrained("./tinyllama-python-adapter")
 tokenizer.save_pretrained("./tinyllama-python-adapter")
 ```
 
-## 4. Serving with vLLM
+## 4. Models comparison
 
-vLLM supports two patterns for fine-tuned models.
+Let's try the original model and fine-tuned model.
 
 **Step 1 — Merge the adapter into base weights:**
 
@@ -166,29 +166,6 @@ print(output[0]["generated_text"])
 ```
 
 The base model rephrases the prompt. The fine-tuned version returns actual Python code following the Alpaca response format it was trained on.
-
-**For production — Dynamic LoRA loading in vLLM** (serve multiple adapters from one base model without separate checkpoints):
-
-```python
-from vllm import LLM, SamplingParams
-from vllm.lora.request import LoRARequest
-
-# One base model instance, adapters loaded on demand per request
-llm = LLM(model=MODEL_ID, enable_lora=True, max_lora_rank=64)
-
-outputs = llm.generate(
-    ["Write a Python function that reverses a linked list."],
-    SamplingParams(temperature=0.7, max_tokens=256),
-    lora_request=LoRARequest(
-        lora_name="python_adapter",
-        lora_int_id=1,
-        lora_local_path="./tinyllama-python-adapter",
-    ),
-)
-print(outputs[0].outputs[0].text)
-```
-
-This pattern scales naturally when you accumulate task-specific adapters (SQL generation, code review, summarization) — one copy of base weights, many adapters routed on demand.
 
 ## Conclusion
 
