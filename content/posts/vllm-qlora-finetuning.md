@@ -9,7 +9,7 @@ Fine-tuning a large language model on commodity hardware used to require painful
 
 This article walks through the complete workflow: adapt a causal LM with QLoRA, then load the result into vLLM for batched, high-throughput generation.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JulienHeiduk/jheiduk.com/blob/main/notebooks/vllm_qlora_finetuning.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1OxQhcAYBWyPSO8Ac4pSIDZFWk-8DwQpt?usp=sharing)
 
 > **Note on embedding:** Google Colab sets `X-Frame-Options: SAMEORIGIN` on all its pages, which prevents browsers from rendering the notebook inside an `<iframe>`. The badge above is the standard workaround — it opens the notebook in a new Colab tab with a single click.
 
