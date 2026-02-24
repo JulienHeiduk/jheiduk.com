@@ -9,7 +9,7 @@ Fine-tuning a large language model on commodity hardware used to require painful
 
 This article walks through the complete workflow: adapt a causal LM with QLoRA, then load the result into vLLM for batched, high-throughput generation.
 
-[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JulienHeiduk/jheiduk.com/blob/main/notebooks/vllm-qlora-finetuning.ipynb)
+[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/JulienHeiduk/jheiduk.com/blob/main/notebooks/vllm_qlora_finetuning.ipynb)
 
 > **Note on embedding:** Google Colab sets `X-Frame-Options: SAMEORIGIN` on all its pages, which prevents browsers from rendering the notebook inside an `<iframe>`. The badge above is the standard workaround — it opens the notebook in a new Colab tab with a single click.
 
@@ -23,10 +23,6 @@ vLLM introduces **PagedAttention**: the KV cache is split into fixed-size pages 
 - **Continuous batching** — new requests slot in mid-batch instead of waiting for the current batch to drain
 - 20–30× higher throughput than naive `model.generate()` at the same latency
 - Native support for LoRA adapters, GPTQ/AWQ quantization, and tensor parallelism
-
-<!-- Diagram: Show vLLM's PagedAttention KV-cache as paged blocks vs. contiguous pre-allocated blocks in standard inference, side by side. Include labels for fragmentation waste in the standard approach and zero-waste in PagedAttention. -->
-![vllm-paged-attention](/vllm-paged-attention.svg)
-*Figure: PagedAttention allocates KV-cache in pages, eliminating fragmentation.*
 
 ## 2. Fine-Tuning with QLoRA
 
@@ -49,7 +45,7 @@ The result: fine-tuning a 7B model in under 12 GB of VRAM.
 ### Requirements
 
 ```bash
-pip install transformers peft trl bitsandbytes accelerate datasets vllm
+uv pip install transformers peft trl bitsandbytes accelerate datasets vllm
 ```
 
 ### Step 1 — Load the base model in 4-bit
@@ -102,8 +98,14 @@ model.print_trainable_parameters()
 from datasets import load_dataset
 from trl import SFTTrainer, SFTConfig
 
-# 2,000 Python instruction-following examples from Alpaca format
+# 2,000 Python instruction-following examples in Alpaca format
 dataset = load_dataset("iamtarun/python_code_instructions_18k_alpaca", split="train[:2000]")
+
+# Combine instruction / input / output into a single text field
+dataset = dataset.map(lambda x: {
+    "text": f"### Instruction:\n{x['instruction']}\n\n### Input:\n{x['input']}\n\n### Response:\n{x['output']}"
+})
+dataset = dataset.remove_columns(["prompt"])  # drop original prompt column
 
 sft_config = SFTConfig(
     output_dir="./tinyllama-python-adapter",
@@ -112,14 +114,12 @@ sft_config = SFTConfig(
     gradient_accumulation_steps=4,   # effective batch = 16
     warmup_steps=50,
     learning_rate=2e-4,
-    fp16=True,
+    bf16=True,
     logging_steps=50,
-    max_seq_length=512,
-    dataset_text_field="output",
+    dataset_text_field="text",
 )
 trainer = SFTTrainer(
     model=model,
-    tokenizer=tokenizer,
     train_dataset=dataset,
     args=sft_config,
 )
@@ -132,35 +132,48 @@ tokenizer.save_pretrained("./tinyllama-python-adapter")
 
 vLLM supports two patterns for fine-tuned models.
 
-**Option A — Merge adapter into base weights** (recommended for production with a single adapter):
+**Step 1 — Merge the adapter into base weights:**
 
 ```python
 from peft import PeftModel
 from transformers import AutoModelForCausalLM
 
-# Load base in full precision, merge LoRA weights, save
+# Load base in full precision and fuse LoRA weights (ΔW = BA)
 base = AutoModelForCausalLM.from_pretrained(MODEL_ID)
 merged = PeftModel.from_pretrained(base, "./tinyllama-python-adapter")
 merged = merged.merge_and_unload()   # fuses ΔW = BA into the base weights
 merged.save_pretrained("./tinyllama-merged")
-
-from vllm import LLM, SamplingParams
-
-llm = LLM(model="./tinyllama-merged")
-outputs = llm.generate(
-    ["Write a Python function that reverses a linked list."],
-    SamplingParams(temperature=0.7, max_tokens=256),
-)
-print(outputs[0].outputs[0].text)
+tokenizer.save_pretrained("./tinyllama-merged")
+print("Merged model saved.")
 ```
 
-**Option B — Dynamic LoRA loading** (for serving multiple adapters from a single base model):
+**Step 2 — Before/after comparison with the HuggingFace pipeline:**
+
+```python
+from transformers import pipeline
+
+# Original model — no fine-tuning
+pipe = pipeline("text-generation", model=MODEL_ID, torch_dtype="auto", device_map="auto")
+output = pipe("Write a Python function that reverses a linked list.", max_new_tokens=200)
+print(output[0]["generated_text"])
+```
+
+```python
+# Fine-tuned model — adapter merged into weights
+pipe = pipeline("text-generation", model="./tinyllama-merged", torch_dtype="auto", device_map="auto")
+output = pipe("Write a Python function that reverses a linked list.", max_new_tokens=200)
+print(output[0]["generated_text"])
+```
+
+The base model rephrases the prompt. The fine-tuned version returns actual Python code following the Alpaca response format it was trained on.
+
+**For production — Dynamic LoRA loading in vLLM** (serve multiple adapters from one base model without separate checkpoints):
 
 ```python
 from vllm import LLM, SamplingParams
 from vllm.lora.request import LoRARequest
 
-# One base model instance, many adapters loaded on demand
+# One base model instance, adapters loaded on demand per request
 llm = LLM(model=MODEL_ID, enable_lora=True, max_lora_rank=64)
 
 outputs = llm.generate(
@@ -175,7 +188,7 @@ outputs = llm.generate(
 print(outputs[0].outputs[0].text)
 ```
 
-Option B is the pattern to reach for when you have a fleet of task-specific adapters (SQL generation, code review, summarization) and want to route requests without the overhead of maintaining separate model replicas.
+This pattern scales naturally when you accumulate task-specific adapters (SQL generation, code review, summarization) — one copy of base weights, many adapters routed on demand.
 
 ## Conclusion
 
