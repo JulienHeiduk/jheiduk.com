@@ -1,5 +1,5 @@
 ---
-title: "Fine-Tune LLMs with QLoRA and Serve Them with vLLM"
+title: "Fine-Tune LLMs with QLoRA"
 date: 2026-02-24
 draft: false
 summary: "Fine-tune a large language model with QLoRA on a single GPU, then serve it at high throughput using vLLM's PagedAttention engine."
