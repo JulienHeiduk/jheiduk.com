@@ -8,7 +8,7 @@ api = HfApi()
 
 @mcp.resource("hf://models")
 def list_models() -> str:
-    """Top 10 trending text-generation models on Hugging Face Hub."""
+    """Top 10 most liked text-generation models on Hugging Face Hub."""
     models = list(api.list_models(filter="text-generation", sort="likes", direction=-1, limit=10))
     return json.dumps([
         {"id": m.id, "likes": m.likes or 0, "downloads": m.downloads or 0}

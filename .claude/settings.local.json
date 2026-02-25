@@ -8,7 +8,8 @@
       "Bash(echo exit: $?:*)",
       "Bash(cd /c/Users/julie/jheiduk.com && git add \"layouts/_default/list.html\" \"assets/custom.css\" 2>&1 && git status 2>&1)",
       "Bash(cd /c/Users/julie/jheiduk.com && hugo 2>&1)",
-      "Bash(ls:*)"
+      "Bash(ls:*)",
+      "Bash(python:*)"
     ]
   }
 }
