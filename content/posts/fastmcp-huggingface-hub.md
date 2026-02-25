@@ -39,10 +39,11 @@ In FastMCP, a **static resource** has a fixed URI and returns a value on every r
 ```python
 @mcp.resource("hf://models")
 def list_models() -> str:
-    """Top 10 trending text-generation models on Hugging Face Hub."""
+    """Top 10 most liked text-generation models on Hugging Face Hub."""
     models = list(api.list_models(
-        task="text-generation",
-        sort="trending",
+        filter="text-generation",
+        sort="likes",
+        direction=-1,
         limit=10,
     ))
     return json.dumps([
@@ -53,9 +54,10 @@ def list_models() -> str:
 
 @mcp.resource("hf://datasets")
 def list_datasets() -> str:
-    """Top 10 trending datasets on Hugging Face Hub."""
+    """Top 10 most liked datasets on Hugging Face Hub."""
     datasets = list(api.list_datasets(
-        sort="trending",
+        sort="likes",
+        direction=-1,
         limit=10,
     ))
     return json.dumps([
@@ -128,18 +130,18 @@ import asyncio
 from fastmcp import Client
 
 async def main():
-    async with Client("hf_server/server.py") as client:
-        # Trending model catalogue
+    async with Client("hf_server.py") as client:
+        # Most liked model catalogue
         result = await client.read_resource("hf://models")
-        print("Trending models:\n", result[0].text[:400])
+        print("Top models:\n", result[0].text[:400])
 
         # Specific model detail
         result = await client.read_resource("hf://models/google/gemma-2-2b")
         print("\nModel detail:\n", result[0].text)
 
-        # Trending dataset catalogue
+        # Most liked dataset catalogue
         result = await client.read_resource("hf://datasets")
-        print("\nTrending datasets:\n", result[0].text[:400])
+        print("\nTop datasets:\n", result[0].text[:400])
 
         # Specific dataset detail
         result = await client.read_resource("hf://datasets/rajpurkar/squad")
