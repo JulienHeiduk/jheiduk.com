@@ -1,4 +1,4 @@
-baseurl = "/"
+baseurl = "https://jheiduk.com/"
 languageCode = "en-us"
 theme = "paper-new"
 paginate = 5
