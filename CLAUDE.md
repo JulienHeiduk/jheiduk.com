@@ -39,7 +39,7 @@ hugo new posts/my-post-title.md
 - KaTeX math rendering is enabled globally (`math = true`)
 - Syntax highlighting via highlight.js is disabled (`disableHLJS = true`)
 - Social links: GitHub (`JulienHeiduk`) and LinkedIn (`julien-heiduk`)
-- Comments via Graph Comment (`graphCommentId`)
+- Menu items: Training (external), About (`/posts/introduction/`), Applications dropdown (RAG Demo, GNN Explorer — both Streamlit apps)
 
 ## Article Command
 
@@ -50,7 +50,7 @@ A custom slash command `/article` writes a complete, SEO-optimised blog post on 
 /article <topic>
 ```
 
-The agent targets 600–900 words of prose, includes at least one runnable Python example, suggests Excalidraw diagrams where useful, and fills in the front matter (title, date, summary). The command definition lives in `.claude/commands/article.md`.
+The agent targets 600–900 words of prose, includes at least one runnable Python example, suggests Excalidraw diagrams where useful, and fills in the front matter (title, date, summary). It also creates a companion Jupyter notebook at `notebooks/<slug>.ipynb` that runs all the article's code top-to-bottom. The command definition lives in `.claude/commands/article.md`.
 
 When an Excalidraw diagram is suggested, export it from excalidraw.com as SVG and place it directly in `static/` so Hugo can serve it as `/<filename>.svg`.
 
