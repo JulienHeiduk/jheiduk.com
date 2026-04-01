@@ -4,6 +4,10 @@ theme = "paper-new"
 paginate = 5
 summaryLength = 70
 
+[sitemap]
+  changefreq = "weekly"
+  priority = 0.5
+
 [params]
   # color style
   color = 'light'                           # linen, wheat, gray, light

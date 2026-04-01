@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /page/
+Disallow: /posts/page/
+Disallow: /tags/
+Disallow: /categories/
+
+Sitemap: https://jheiduk.com/sitemap.xml

@@ -84,6 +84,22 @@
   <link rel="icon" href="{{ `favicon.ico` | absURL }}" />
   <link rel="apple-touch-icon" href="{{ `apple-touch-icon.png` | absURL }}" />
 
+  <!-- SEO: noindex pagination pages 2+ to avoid thin/duplicate content indexing -->
+  {{ if and (not .IsPage) .Paginator }}
+    {{ if gt .Paginator.PageNumber 1 }}
+  <meta name="robots" content="noindex, follow">
+    {{ end }}
+    {{ if .Paginator.HasPrev }}
+  <link rel="prev" href="{{ .Paginator.Prev.URL | absURL }}">
+    {{ end }}
+    {{ if .Paginator.HasNext }}
+  <link rel="next" href="{{ .Paginator.Next.URL | absURL }}">
+    {{ end }}
+  {{ end }}
+
+  <!-- Canonical URL -->
+  <link rel="canonical" href="{{ .Permalink }}">
+
   <!-- Generator -->
   {{ hugo.Generator }}
 
