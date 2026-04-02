@@ -2,6 +2,7 @@
 title: "Manage Product Compatibility with Machine Learning"
 date: 2024-05-23
 draft: false
+tags: ["recommendation", "machine-learning", "nlp"]
 summary: "The paper Adaptive Multi-view Rule Discovery for Weakly-Supervised Compatible Products Prediction by Rongzhi Zhang, Rebecca West, Xiquan Cui, and Chao Zhang presents an innovative method..."
 ---
 

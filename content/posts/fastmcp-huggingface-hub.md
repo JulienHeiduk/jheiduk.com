@@ -2,6 +2,7 @@
 title: "FastMCP Server with Hugging Face Hub Resources"
 date: 2026-02-25
 draft: false
+tags: ["mcp", "huggingface", "llm", "python"]
 summary: "Build a FastMCP server that exposes Hugging Face Hub models and datasets as queryable MCP resources for LLM agents."
 ---
 

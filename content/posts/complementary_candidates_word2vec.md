@@ -2,6 +2,7 @@
 title: "Complementary Candidate Generator with Word2Vec"
 date: 2024-01-15
 draft: false
+tags: ["word2vec", "recommendation", "embeddings"]
 summary: "Candidates generation is the first step in a Multi-Stage recommendation system."
 ---
 

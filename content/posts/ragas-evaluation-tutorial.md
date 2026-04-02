@@ -2,6 +2,8 @@
 title: "Evaluating RAG Pipelines with RAGAS: A Comprehensive Tutorial"
 date: 2026-04-02
 draft: false
+tags: ["rag", "evaluation", "ragas", "ollama", "llm"]
+toc: true
 summary: "RAGAS provides objective, LLM-powered metrics to evaluate every component of your RAG pipeline. Learn how to measure faithfulness, context precision, context recall, and more with Qwen2.5 served locally via Ollama — fully offline, no API key required."
 ---
 

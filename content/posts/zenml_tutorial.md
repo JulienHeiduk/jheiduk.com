@@ -2,6 +2,7 @@
 title: "ZenML Pipeline Tutorial Part 1: How to Use ZenML for Building a Machine Learning Pipeline"
 date: 2024-08-15
 draft: false
+tags: ["zenml", "mlops", "pipeline"]
 summary: "In this tutorial, we will explore how to use ZenML to build a machine learning pipeline that performs data loading, model training, and evaluation..."
 ---
 ## Introduction

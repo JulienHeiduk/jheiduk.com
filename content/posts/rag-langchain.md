@@ -2,6 +2,8 @@
 title: "Retrieval-Augmented Generation with LangChain"
 date: 2026-02-22
 draft: false
+tags: ["rag", "langchain", "embeddings", "llm"]
+toc: true
 summary: "RAG grounds LLM answers in your own documents. Learn how to build a production-ready RAG pipeline with LangChain, FAISS, and OpenAI in Python."
 ---
 

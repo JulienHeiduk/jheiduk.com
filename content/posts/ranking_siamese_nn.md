@@ -2,6 +2,7 @@
 title: "Product Recommendation in Retail"
 date: 2023-09-11
 draft: false
+tags: ["recommendation", "deep-learning", "siamese-network"]
 summary: "In this first article, we will study the method proposed by Home Depot to recommend products on each product page. The recommender system proposed in this research paper is characterized a Item-to-Item..."
 ---
 

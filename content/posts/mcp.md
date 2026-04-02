@@ -2,6 +2,7 @@
 title: "Model Context Protocol server with FastMCP"
 date: 2025-05-12
 draft: false
+tags: ["mcp", "python", "llm"]
 summary: "This tutorial explores how to create a MCP server with FastMCP and why use it."
 ---
 

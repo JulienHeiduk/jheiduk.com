@@ -2,6 +2,7 @@
 title: "Querying the Hugging Face Hub with a Tiny LLM and FastMCP"
 date: 2026-02-25
 draft: false
+tags: ["mcp", "huggingface", "llm", "inference"]
 summary: "Load Qwen2.5-0.5B-Instruct, connect it to a FastMCP server via context injection, and answer live questions about the Hugging Face Hub catalogue."
 ---
 

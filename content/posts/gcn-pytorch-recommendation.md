@@ -2,6 +2,8 @@
 title: "GCN with PyTorch for Co-Purchase Recommendation"
 date: 2026-02-22
 draft: false
+tags: ["gnn", "pytorch", "recommendation", "graph"]
+toc: true
 summary: "Graph Convolutional Networks turn co-purchase data into a graph and learn item embeddings for recommendation. A full PyTorch Geometric implementation included."
 ---
 

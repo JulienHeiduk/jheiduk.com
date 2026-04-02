@@ -2,6 +2,7 @@
 title: "Similar and complementary candidates generator"
 date: 2024-11-27
 draft: false
+tags: ["word2vec", "recommendation", "embeddings"]
 summary: "In this tutorial, we'll explore how to leverage Word2Vec to find words that are similar or complementary. We'll discuss two specific approaches - the IN-OUT approach and the OUT-OUT approach - both of which are useful for various applications, including recommender systems."
 ---
 

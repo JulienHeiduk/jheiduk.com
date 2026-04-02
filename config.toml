@@ -17,13 +17,24 @@ summaryLength = 70
   monoDarkIcon = true                       # show monochrome dark mode icon
   math = true                               # enable KaTex math typesetting globally
 
+[markup]
+  [markup.highlight]
+    style = 'dracula'
+    lineNos = false
+    codeFences = true
+    guessSyntax = true
+    noClasses = true
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 3
+
   # header social icons
   github = 'JulienHeiduk'                 # github.com/YOUR_GITHUB_ID
   linkedin = 'julien-heiduk'             # linkedin.com/in/YOUR_LINKEDIN_ID
 
   avatar = 'julien.heiduk@gmail.com'                 # gravatar email or image url
   name = 'Julien Heiduk'
-  bio = "Let's talk about recommandation systems and ML in real-world business scenarios."
+  bio = "Building AI systems & production pipelines. Writing about what actually works."
    
   [blog]
     showSummary = true  

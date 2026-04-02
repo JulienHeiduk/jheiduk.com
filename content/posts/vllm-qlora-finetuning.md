@@ -2,6 +2,8 @@
 title: "Fine-Tune LLMs with QLoRA"
 date: 2026-02-24
 draft: false
+tags: ["llm", "fine-tuning", "qlora", "vllm"]
+toc: true
 summary: "Fine-tune a large language model with QLoRA on a single GPU, then serve it at high throughput using vLLM's PagedAttention engine."
 ---
 
