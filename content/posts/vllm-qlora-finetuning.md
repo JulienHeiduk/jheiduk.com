@@ -178,3 +178,5 @@ The two libraries are complementary by design: train with the PEFT/TRL ecosystem
 - [QLoRA paper — "QLoRA: Efficient Finetuning of Quantized LLMs" (Dettmers et al., 2023)](https://arxiv.org/abs/2305.14314)
 - [PEFT library (HuggingFace)](https://huggingface.co/docs/peft/)
 - [TRL — Transformer Reinforcement Learning](https://huggingface.co/docs/trl/)
+
+The companion notebook with all the code from this article is available [on GitHub](https://github.com/JulienHeiduk/jheiduk.com/tree/main/notebooks/vllm_qlora_finetuning.ipynb).

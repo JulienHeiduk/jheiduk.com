@@ -157,3 +157,5 @@ Directions for improvement:
 - **Temporal edges**: weight edges by recency to discount old purchasing patterns.
 
 For a different graph embedding approach applied to the same recommendation problem, see the article on [Cleora graph embeddings](https://jheiduk.com/posts/cleora_graph_embeddings/).
+
+The companion notebook with all the code from this article is available [on GitHub](https://github.com/JulienHeiduk/jheiduk.com/tree/main/notebooks/gcn-pytorch-recommendation.ipynb).

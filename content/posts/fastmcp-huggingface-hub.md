@@ -163,3 +163,5 @@ Three natural extensions from here:
 - **Private repos**: pass `token=os.getenv("HF_TOKEN")` to `HfApi()` to access gated or private repositories without modifying the resource logic.
 
 For the MCP fundamentals — tools, prompts, and the wire protocol — see the [introductory FastMCP article](https://jheiduk.com/posts/mcp/).
+
+The companion notebook with all the code from this article is available [on GitHub](https://github.com/JulienHeiduk/jheiduk.com/tree/main/notebooks/fastmcp-huggingface-hub.ipynb).

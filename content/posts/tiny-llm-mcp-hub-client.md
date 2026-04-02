@@ -152,3 +152,5 @@ Three natural next steps:
 - **Streaming**: pass a `TextStreamer` to `model.generate` to stream tokens as they are produced, which improves perceived latency for interactive applications.
 
 For the server implementation, see [FastMCP Server with Hugging Face Hub Resources](https://jheiduk.com/posts/fastmcp-huggingface-hub/).
+
+The companion notebook with all the code from this article is available [on GitHub](https://github.com/JulienHeiduk/jheiduk.com/tree/main/notebooks/tiny-llm-mcp-hub-client.ipynb).
